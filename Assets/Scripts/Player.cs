@@ -16,6 +16,12 @@ public class Player : MonoBehaviour
     // true if player still alive
     private bool m_IsLiving = true;
 
+    public GameObject m_WallPrefab;
+
+    public GameObject m_CurrentWall = null;
+
+    private Vector3 m_WallStartPos;
+
     public bool IsLiving
     {
         get => m_IsLiving;
@@ -25,7 +31,6 @@ public class Player : MonoBehaviour
     {
         Debug.Log(name + " is Dead");
         m_IsLiving = false;
-        
     }
 
     private float HandleInput(float turn)
@@ -33,6 +38,9 @@ public class Player : MonoBehaviour
         if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
             m_IsLeftDown = true;
             turn += 90.0f;
+
+            m_CurrentWall = null;
+
         } else if (!Input.GetKey(m_LeftTurnKey)) {
             m_IsLeftDown = false;
         }
@@ -40,8 +48,12 @@ public class Player : MonoBehaviour
         if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
             m_IsRightDown = true;
             turn -= 90.0f;
+
+            m_CurrentWall = null;
+
         } else if (!Input.GetKey(m_RightTurnKey)) {
             m_IsRightDown = false;
+
         }
 
         return turn;
@@ -61,5 +73,17 @@ public class Player : MonoBehaviour
             float speed = m_PlayerSpeedPerSec * Time.deltaTime;
             transform.position += -transform.up * speed;
         }
+
+        if (m_CurrentWall == null) {
+            // --- current wall does not exist, create it ---
+
+            // store wall starting position
+            m_WallStartPos = transform.position;
+
+            // create the wall
+            m_CurrentWall = (GameObject)Instantiate(
+                m_WallPrefab, m_WallStartPos, Quaternion.identity);
+        }
+
     }
 }
