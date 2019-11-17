@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public GameObject m_WallPrefab;
 
-    public GameObject m_CurrentWall = null;
+    private GameObject m_CurrentWall = null;
 
     private Vector3 m_WallStartPos;
 
@@ -83,6 +83,26 @@ public class Player : MonoBehaviour
             // create the wall
             m_CurrentWall = (GameObject)Instantiate(
                 m_WallPrefab, m_WallStartPos, Quaternion.identity);
+
+            m_CurrentWall.transform.position = m_WallStartPos;
+
+        } else {
+            // --- current wall exists, update transform ---
+
+            // TODO
+
+            // update position
+
+            // update scale
+
+            Vector3 deltaPos = transform.position - m_WallStartPos;
+
+            Debug.Log(deltaPos);
+
+            Vector3 scale = m_CurrentWall.transform.localScale;
+
+            m_CurrentWall.transform.localScale = new Vector3(deltaPos.x*10, 1, 1);
+
         }
 
     }
