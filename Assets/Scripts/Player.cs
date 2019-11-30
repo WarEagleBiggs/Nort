@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,19 +13,24 @@ public class Player : MonoBehaviour
 
     public KeyCode m_RightTurnKey;
     private bool m_IsRightDown = false;
-    
+
     // true if player still alive
     private bool m_IsLiving = true;
 
-    public GameObject m_WallPrefab;
+    public Color m_WallColor = Color.yellow;
+    public float m_WallWidth = 3f;
 
-    private GameObject m_CurrentWall = null;
-
-    private Vector3 m_WallStartPos;
+    private GameObject m_CurrentWall;
+    private Mesh m_WallMesh;
 
     public bool IsLiving
     {
         get => m_IsLiving;
+    }
+
+    private void Start()
+    {
+        AddWall();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,30 +39,59 @@ public class Player : MonoBehaviour
         m_IsLiving = false;
     }
 
+    private void AddWall()
+    {
+        m_CurrentWall = new GameObject();
+        MeshRenderer renderer = m_CurrentWall.AddComponent<MeshRenderer>();
+        MeshFilter mfilter = m_CurrentWall.AddComponent<MeshFilter>();
+        m_WallMesh = mfilter.mesh;
+        m_WallMesh = new Mesh();
+        
+        // 4 vertices for two triangles
+        Vector3[] triVerts = new Vector3[4];
+        // two triangles with 3 vertices each
+        int[] triIndices = new int[6];
+        
+        // position the vertices
+        //triVerts[0] = transform.position + transform 
+        
+        m_WallMesh.Clear();
+        m_WallMesh.vertices = triVerts;
+        m_WallMesh.triangles = triIndices;
+    }
+
+    private void UpdateWall()
+    {
+        
+    }
+
     private float HandleInput(float turn)
     {  
         if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
             m_IsLeftDown = true;
             turn += 90.0f;
-
-            m_CurrentWall = null;
-
+            AddWall();
         } else if (!Input.GetKey(m_LeftTurnKey)) {
             m_IsLeftDown = false;
+            AddWall();
         }
-
         if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
             m_IsRightDown = true;
             turn -= 90.0f;
-
-            m_CurrentWall = null;
-
+            AddWall();
         } else if (!Input.GetKey(m_RightTurnKey)) {
             m_IsRightDown = false;
-
+            AddWall();
         }
 
         return turn;
+    }
+
+    Vector3 GetPlayerDirection()
+    {
+        // returns player direction unit vector
+        // assumes forward direction is Y axis (green)
+        return transform.rotation * new Vector3(0f, 1f, 0f); 
     }
 
     // Update is called once per frame
@@ -71,39 +106,10 @@ public class Player : MonoBehaviour
         if (m_IsLiving) {
             transform.rotation = Quaternion.Euler(euler.x, euler.y, turn);
             float speed = m_PlayerSpeedPerSec * Time.deltaTime;
-            transform.position += -transform.up * speed;
+            
+            transform.position += -GetPlayerDirection() * speed;
+
+            UpdateWall();
         }
-
-        if (m_CurrentWall == null) {
-            // --- current wall does not exist, create it ---
-
-            // store wall starting position
-            m_WallStartPos = transform.position;
-
-            // create the wall
-            m_CurrentWall = (GameObject)Instantiate(
-                m_WallPrefab, m_WallStartPos, Quaternion.identity);
-
-            m_CurrentWall.transform.position = m_WallStartPos;
-
-        } else {
-            // --- current wall exists, update transform ---
-
-            // TODO
-
-            // update position
-
-            // update scale
-
-            Vector3 deltaPos = transform.position - m_WallStartPos;
-
-            Debug.Log(deltaPos);
-
-            Vector3 scale = m_CurrentWall.transform.localScale;
-
-            m_CurrentWall.transform.localScale = new Vector3(deltaPos.x*10, 1, 1);
-
-        }
-
     }
 }
