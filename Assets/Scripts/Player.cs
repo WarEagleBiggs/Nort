@@ -21,12 +21,11 @@ public class Player : MonoBehaviour
     // true if player still alive
     private bool m_IsLiving = true;
 
-    private bool m_IsRebuildWall;
+    private bool m_IsBeginWall;
 
     public Color m_WallColor = Color.yellow;
     public float m_WallWidth = 3f;
 
-    private GameObject m_CurrentWall;
     private Mesh m_WallMesh;
 
     public bool IsLiving
@@ -36,7 +35,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        m_IsRebuildWall = true;
+        m_IsBeginWall = true;
     }
 
     Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
@@ -50,11 +49,11 @@ public class Player : MonoBehaviour
 
     private void AddWall()
     {
-        m_CurrentWall = new GameObject();
-        m_CurrentWall.transform.parent = transform.root;
-        m_CurrentWall.name = m_PlayerName + "Wall";
+        GameObject wall = new GameObject();
+        wall.transform.parent = transform.root;
+        wall.name = m_PlayerName + "Wall";
         
-        MeshRenderer renderer = m_CurrentWall.AddComponent<MeshRenderer>();
+        MeshRenderer renderer = wall.AddComponent<MeshRenderer>();
 
         Shader shader = Shader.Find("Unlit/Color");
         Material mat = new Material(shader);
@@ -88,69 +87,101 @@ public class Player : MonoBehaviour
         m_WallMesh.vertices = triVerts;
         m_WallMesh.triangles = triIndices;
 
-        MeshFilter mfilter = m_CurrentWall.AddComponent<MeshFilter>();
+        MeshFilter mfilter = wall.AddComponent<MeshFilter>();
         mfilter.mesh = m_WallMesh;
-
     }
 
-    private void UpdateWall()
+//    
+//    public static Bounds FindExtents(GameObject obj)
+//    {
+//        Bounds ret = new Bounds();
+//        ret.max = new Vector3(Mathf.NegativeInfinity, Mathf.NegativeInfinity, Mathf.NegativeInfinity);
+//        ret.min = new Vector3(Mathf.Infinity, Mathf.Infinity, Mathf.Infinity);
+//
+//        foreach (Renderer rend in obj.GetComponentsInChildren(typeof(Renderer), includeInactive: true)) {
+//            ret.Encapsulate(rend.bounds);
+//
+//            Vector3 scale = rend.gameObject.transform.localScale;
+//            ret.SetMinMax(
+//                Vector3.Scale(ret.min, scale),
+//                Vector3.Scale(ret.max, scale));
+//            
+//        }
+//
+//        return ret;
+//    }
+    
+    private void UpdateWall(bool isFinalize = false)
     {
         if (m_WallMesh != null) {
             Vector3[] triVerts = m_WallMesh.vertices;
-            triVerts[2] = transform.position - PlayerRightDirection() * m_WallWidth;
-            triVerts[3] = transform.position + PlayerRightDirection() * m_WallWidth;
+
+            Vector3 center = transform.position;
+
+            triVerts[2] = center - PlayerRightDirection() * m_WallWidth;
+            triVerts[3] = center + PlayerRightDirection() * m_WallWidth;
 
             m_WallMesh.vertices = triVerts;
         }
     }
 
-    private float HandleInput(float turn)
+    private void RotatePlayer(Vector3 eulerDeg)
+    {
+        transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
+        // back up a bit
+        transform.position += PlayerForwardDirection() * (m_WallWidth);
+    }
+    
+
+    private void HandleInput()
     {  
         if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
             m_IsLeftDown = true;
-            turn += 90.0f;
-            // XXX TODO end wall here!
-            m_IsRebuildWall = true;
+            
+            Vector3 euler = transform.rotation.eulerAngles;
+            euler.z += 90f;
+
+            RotatePlayer(euler);
+
+            // flag to create a new wall
+            m_IsBeginWall = true;
+            
         } else if (!Input.GetKey(m_LeftTurnKey)) {
             // clear flag
             m_IsLeftDown = false;
         }
         if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
             m_IsRightDown = true;
-            turn -= 90.0f;
-            // XXX TODO end wall here!
-            m_IsRebuildWall = true;
+            
+            Vector3 euler = transform.rotation.eulerAngles;
+            euler.z -= 90f;
+
+            RotatePlayer(euler);
+
+            // flag to create a new wall
+            m_IsBeginWall = true;
         } else if (!Input.GetKey(m_RightTurnKey)) {
             // clear flag
             m_IsRightDown = false;
         }
-
-        return turn;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 euler = transform.rotation.eulerAngles;
-        float turn = euler.z;
-
         // handle input keys
-        turn = HandleInput(turn);
+        HandleInput();
 
-        if (m_IsLiving) {
-            transform.rotation = Quaternion.Euler(euler.x, euler.y, turn);
-            float speed = m_PlayerSpeedPerSec * Time.deltaTime;
-            
-            transform.position += -PlayerForwardDirection() * speed;
-        }
-
-        if (m_IsRebuildWall) {
-            m_IsRebuildWall = false;
+        if (m_IsBeginWall) {
+            m_IsBeginWall = false;
             AddWall();
         }
-        
-        
+
         UpdateWall();
+
+        if (m_IsLiving) {
+            float speed = m_PlayerSpeedPerSec * Time.deltaTime;
+            transform.position += -PlayerForwardDirection() * speed;
+        }
 
     }
 }
