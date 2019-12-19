@@ -53,10 +53,7 @@ public class Player : MonoBehaviour
         wall.transform.parent = transform.root;
         wall.name = m_PlayerName + "Wall";
 
-        
-
         MeshRenderer renderer = wall.AddComponent<MeshRenderer>();
-        MeshCollider collider = wall.AddComponent<MeshCollider>();
         Shader shader = Shader.Find("Unlit/Color");
         Material mat = new Material(shader);
         renderer.material = mat;
@@ -172,17 +169,23 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // handle input keys
-        HandleInput();
+        if (m_IsLiving) {
+            // handle input keys
+            HandleInput();
+        }
 
         if (m_IsBeginWall) {
+            // --- start a new wall in this frame ---
             m_IsBeginWall = false;
+            // generate mesh for wall
             AddWall();
         }
 
+        // update wall vertices based on player position
         UpdateWall();
 
         if (m_IsLiving) {
+            // --- play is alive, update position ---
             float speed = m_PlayerSpeedPerSec * Time.deltaTime;
             transform.position += -PlayerForwardDirection() * speed;
         }
