@@ -8,6 +8,10 @@ Packages/
 Materials/
 Resources/
 Assets/AssetStoreTools*
+Assets/TextMesh Pro*
+*.meta
+Assets/*.meta
+
 
 # Visual Studio cache directory
 .vs/
