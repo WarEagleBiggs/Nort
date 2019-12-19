@@ -21,12 +21,13 @@ public class Player : MonoBehaviour
     // true if player is still alive
     private bool m_IsLiving = true;
 
-    private bool m_IsBeginWall;
+    private bool m_IsBeginTrail;
 
-    public Color m_WallColor = Color.yellow;
-    public float m_WallWidth = 3f;
+    public Color m_TrailColor = Color.yellow;
+    public float m_TrailWidth = 3f;
+    private BoxCollider2D m_TrailCollider;
 
-    private Mesh m_WallMesh;
+    private Mesh m_TrailMesh;
 
     public bool IsLiving
     {
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        m_IsBeginWall = true;
+        m_IsBeginTrail = true;
     }
 
     Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
@@ -43,23 +44,26 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(name + " is Dead");
-        m_IsLiving = false;
+        if (other.name.Contains(name)) {
+            Debug.Log("hitting trail");
+        } else { 
+            Debug.Log(name + " is Dead");
+            m_IsLiving = false;
+        }
     }
 
-    private void AddWall()
+    private void AddTrail()
     {
-        GameObject wall = new GameObject();
-        wall.transform.parent = transform.root;
-        wall.name = m_PlayerName + "Wall";
+        GameObject trail = new GameObject();
+        trail.transform.parent = transform.root;
+        trail.name = m_PlayerName + "Trail";
 
-        MeshRenderer renderer = wall.AddComponent<MeshRenderer>();
+        MeshRenderer renderer = trail.AddComponent<MeshRenderer>();
         Shader shader = Shader.Find("Unlit/Color");
         Material mat = new Material(shader);
         renderer.material = mat;
-        mat.SetColor("_Color", m_WallColor);
-
-        
+        mat.SetColor("_Color", m_TrailColor);
+    
         // 4 vertices for two triangles
         Vector3[] triVerts = new Vector3[4];
         // two triangles with 3 vertices each
@@ -69,11 +73,11 @@ public class Player : MonoBehaviour
         Vector3 startPos = transform.position;
         startPos.z = -5f;
         
-        triVerts[0] = startPos - PlayerRightDirection() * m_WallWidth;
-        triVerts[1] = startPos + PlayerRightDirection() * m_WallWidth;
+        triVerts[0] = startPos - PlayerRightDirection() * m_TrailWidth;
+        triVerts[1] = startPos + PlayerRightDirection() * m_TrailWidth;
 
-        triVerts[2] = startPos - PlayerRightDirection() * m_WallWidth;
-        triVerts[3] = startPos + PlayerRightDirection() * m_WallWidth;
+        triVerts[2] = startPos - PlayerRightDirection() * m_TrailWidth;
+        triVerts[3] = startPos + PlayerRightDirection() * m_TrailWidth;
 
         triIndices[0] = 0;
         triIndices[1] = 1;
@@ -82,14 +86,115 @@ public class Player : MonoBehaviour
         triIndices[4] = 1;
         triIndices[5] = 3;
 
-        m_WallMesh = new Mesh();
-        m_WallMesh.Clear();
-        m_WallMesh.vertices = triVerts;
-        m_WallMesh.triangles = triIndices;
+        m_TrailMesh = new Mesh();
+        m_TrailMesh.Clear();
+        m_TrailMesh.vertices = triVerts;
+        m_TrailMesh.triangles = triIndices;
 
-        MeshFilter mfilter = wall.AddComponent<MeshFilter>();
-        mfilter.mesh = m_WallMesh;
+        MeshFilter mfilter = trail.AddComponent<MeshFilter>();
+        mfilter.mesh = m_TrailMesh;
+
+        // add box collider 
+        m_TrailCollider = trail.AddComponent<BoxCollider2D>();
+        m_TrailCollider.size = new Vector2(0.01f, 0.01f);
+
     }
+
+    private void UpdateTrail(bool isFinalize = false)
+    {
+        if (m_TrailMesh != null) {
+            Vector3[] triVerts = m_TrailMesh.vertices;
+
+            Vector3 center = transform.position;
+
+            triVerts[2] = center - PlayerRightDirection() * m_TrailWidth;
+            triVerts[3] = center + PlayerRightDirection() * m_TrailWidth;
+
+            m_TrailMesh.vertices = triVerts;
+        }
+    }
+
+    private void RotatePlayer(Vector3 eulerDeg)
+    {
+        transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
+        // back up a bit
+        transform.position += PlayerForwardDirection() * (m_TrailWidth);
+    }
+    
+
+    private void HandleInput()
+    {  
+        if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
+            m_IsLeftDown = true;
+            
+            Vector3 euler = transform.rotation.eulerAngles;
+            euler.z += 90f;
+
+            RotatePlayer(euler);
+
+            // flag to create a new trail
+            m_IsBeginTrail = true;
+
+            if (m_TrailCollider != null) {
+                // rename trail collider 
+                m_TrailCollider.name = "Trail";
+            }
+            
+        } else if (!Input.GetKey(m_LeftTurnKey)) {
+            // clear flag
+            m_IsLeftDown = false;
+        }
+        if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
+            m_IsRightDown = true;
+            
+            Vector3 euler = transform.rotation.eulerAngles;
+            euler.z -= 90f;
+
+            RotatePlayer(euler);
+
+            // flag to create a new trail
+            m_IsBeginTrail = true;
+
+            if (m_TrailCollider != null) {
+                // rename trail collider 
+                m_TrailCollider.name = "Trail";
+            }
+
+
+        } else if (!Input.GetKey(m_RightTurnKey)) {
+            // clear flag
+            m_IsRightDown = false;
+        }
+    }
+
+    void Update()
+    {
+        if (m_IsLiving) {
+            // handle input keys
+            HandleInput();
+        }
+
+        if (m_IsBeginTrail) {
+            // --- start a new trail in this frame ---
+            m_IsBeginTrail = false;
+            // generate mesh for trail
+            AddTrail();
+        }
+
+        // update trail vertices based on player position
+        UpdateTrail();
+
+        if (m_IsLiving) {
+            // --- play is alive, update position ---
+            float speed = m_PlayerSpeedPerSec * Time.deltaTime;
+            transform.position += -PlayerForwardDirection() * speed;
+        }
+
+    }
+}
+
+
+
 
 //    
 //    public static Bounds FindExtents(GameObject obj)
@@ -111,84 +216,3 @@ public class Player : MonoBehaviour
 //        return ret;
 //    }
 
-
-    private void UpdateWall(bool isFinalize = false)
-    {
-        if (m_WallMesh != null) {
-            Vector3[] triVerts = m_WallMesh.vertices;
-
-            Vector3 center = transform.position;
-
-            triVerts[2] = center - PlayerRightDirection() * m_WallWidth;
-            triVerts[3] = center + PlayerRightDirection() * m_WallWidth;
-
-            m_WallMesh.vertices = triVerts;
-        }
-    }
-
-    private void RotatePlayer(Vector3 eulerDeg)
-    {
-        transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
-        // back up a bit
-        transform.position += PlayerForwardDirection() * (m_WallWidth);
-    }
-    
-
-    private void HandleInput()
-    {  
-        if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
-            m_IsLeftDown = true;
-            
-            Vector3 euler = transform.rotation.eulerAngles;
-            euler.z += 90f;
-
-            RotatePlayer(euler);
-
-            // flag to create a new wall
-            m_IsBeginWall = true;
-            
-        } else if (!Input.GetKey(m_LeftTurnKey)) {
-            // clear flag
-            m_IsLeftDown = false;
-        }
-        if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
-            m_IsRightDown = true;
-            
-            Vector3 euler = transform.rotation.eulerAngles;
-            euler.z -= 90f;
-
-            RotatePlayer(euler);
-
-            // flag to create a new wall
-            m_IsBeginWall = true;
-        } else if (!Input.GetKey(m_RightTurnKey)) {
-            // clear flag
-            m_IsRightDown = false;
-        }
-    }
-
-    void Update()
-    {
-        if (m_IsLiving) {
-            // handle input keys
-            HandleInput();
-        }
-
-        if (m_IsBeginWall) {
-            // --- start a new wall in this frame ---
-            m_IsBeginWall = false;
-            // generate mesh for wall
-            AddWall();
-        }
-
-        // update wall vertices based on player position
-        UpdateWall();
-
-        if (m_IsLiving) {
-            // --- play is alive, update position ---
-            float speed = m_PlayerSpeedPerSec * Time.deltaTime;
-            transform.position += -PlayerForwardDirection() * speed;
-        }
-
-    }
-}
