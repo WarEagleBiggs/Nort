@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     readonly Vector3 m_ForwardVec = new Vector3(0f, 1f, 0f);
     readonly Vector3 m_RightVec = new Vector3(1f, 0f, 0f);
 
-    // true if player still alive
+    // true if player is still alive
     private bool m_IsLiving = true;
 
     private bool m_IsBeginWall;
@@ -52,13 +52,16 @@ public class Player : MonoBehaviour
         GameObject wall = new GameObject();
         wall.transform.parent = transform.root;
         wall.name = m_PlayerName + "Wall";
-        
-        MeshRenderer renderer = wall.AddComponent<MeshRenderer>();
 
+        
+
+        MeshRenderer renderer = wall.AddComponent<MeshRenderer>();
+        MeshCollider collider = wall.AddComponent<MeshCollider>();
         Shader shader = Shader.Find("Unlit/Color");
         Material mat = new Material(shader);
         renderer.material = mat;
         mat.SetColor("_Color", m_WallColor);
+
         
         // 4 vertices for two triangles
         Vector3[] triVerts = new Vector3[4];
@@ -110,7 +113,8 @@ public class Player : MonoBehaviour
 //
 //        return ret;
 //    }
-    
+
+
     private void UpdateWall(bool isFinalize = false)
     {
         if (m_WallMesh != null) {
