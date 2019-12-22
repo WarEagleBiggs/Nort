@@ -136,8 +136,6 @@ public class Player : MonoBehaviour
     private void RotatePlayer(Vector3 eulerDeg)
     {
         transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
-        // back up a bit
-        transform.position += PlayerForwardDirection() * (m_TrailWidth);
     }
     
     private void HandleInput()
@@ -195,8 +193,16 @@ public class Player : MonoBehaviour
         if (m_IsBeginTrail) {
             // --- start a new trail in this frame ---
             m_IsBeginTrail = false;
+
+            // back up a bit
+            transform.position += PlayerForwardDirection() * (m_TrailWidth);
+
             // generate mesh for trail
             AddTrail();
+
+            // restore position
+            transform.position -= PlayerForwardDirection() * (m_TrailWidth);
+
         }
 
         // update trail vertices based on player position
