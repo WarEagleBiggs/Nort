@@ -24,15 +24,12 @@ public class Player : MonoBehaviour
     private bool m_IsBeginTrail;
 
     public Color m_TrailColor = Color.yellow;
-    public float m_TrailWidth = 3f;
-    private BoxCollider2D m_TrailCollider;
+    public float m_TrailWidth = 0.01f;
+    private PolygonCollider2D m_TrailCollider;
 
     private Mesh m_TrailMesh;
 
-    public bool IsLiving
-    {
-        get => m_IsLiving;
-    }
+    public bool IsLiving => m_IsLiving;
 
     private void Start()
     {
@@ -94,14 +91,14 @@ public class Player : MonoBehaviour
         MeshFilter mfilter = trail.AddComponent<MeshFilter>();
         mfilter.mesh = m_TrailMesh;
 
-        // add box collider 
-        m_TrailCollider = trail.AddComponent<BoxCollider2D>();
-        m_TrailCollider.size = new Vector2(0.01f, 0.01f);
-
+        // add collider to match the trail geometry
+        m_TrailCollider = trail.AddComponent<PolygonCollider2D>();
+        m_TrailCollider.isTrigger = true;
     }
 
     private void UpdateTrail(bool isFinalize = false)
     {
+        // --- update trail mesh ---
         if (m_TrailMesh != null) {
             Vector3[] triVerts = m_TrailMesh.vertices;
 
@@ -112,6 +109,28 @@ public class Player : MonoBehaviour
 
             m_TrailMesh.vertices = triVerts;
         }
+        
+        // --- update trail box collider ---
+        if (m_TrailCollider != null) {
+            
+            Vector3[] triVerts = m_TrailMesh.vertices;
+
+            Vector2[] collidePoints = new Vector2[4];
+            collidePoints[0].x = triVerts[0].x;
+            collidePoints[0].y = triVerts[0].y;
+
+            collidePoints[1].x = triVerts[1].x;
+            collidePoints[1].y = triVerts[1].y;
+
+            collidePoints[2].x = triVerts[2].x;
+            collidePoints[2].y = triVerts[2].y;
+
+            collidePoints[3].x = triVerts[3].x;
+            collidePoints[3].y = triVerts[3].y;
+
+            m_TrailCollider.points = collidePoints;
+        }
+
     }
 
     private void RotatePlayer(Vector3 eulerDeg)
@@ -121,7 +140,6 @@ public class Player : MonoBehaviour
         transform.position += PlayerForwardDirection() * (m_TrailWidth);
     }
     
-
     private void HandleInput()
     {  
         if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
