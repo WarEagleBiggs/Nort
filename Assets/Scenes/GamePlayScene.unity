@@ -1863,8 +1863,8 @@ MonoBehaviour:
   m_PlayerSpeedPerSec: 0.2
   m_LeftTurnKey: 107
   m_RightTurnKey: 108
-  m_WallColor: {r: 0.08962262, g: 0.08962262, b: 1, a: 1}
-  m_WallWidth: 0.008
+  m_TrailColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_TrailWidth: 0.01
 --- !u!50 &2086345528
 Rigidbody2D:
   serializedVersion: 4
@@ -1885,7 +1885,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &2091419710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,8 +1935,8 @@ MonoBehaviour:
   m_PlayerSpeedPerSec: 0.2
   m_LeftTurnKey: 97
   m_RightTurnKey: 115
-  m_WallColor: {r: 1, g: 0, b: 0, a: 1}
-  m_WallWidth: 0.008
+  m_TrailColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_TrailWidth: 0.01
 --- !u!50 &2091419713
 Rigidbody2D:
   serializedVersion: 4
@@ -1957,7 +1957,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &2118157391
 GameObject:
   m_ObjectHideFlags: 0
