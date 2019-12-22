@@ -789,7 +789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849352958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03, z: 0}
   m_LocalScale: {x: 0.10000048, y: 0.10000048, z: 1}
   m_Children: []
   m_Father: {fileID: 2091419711}
@@ -808,7 +808,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0024203062, y: 0.053855307}
+  m_Offset: {x: -0.009884501, y: 0.04997143}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -819,7 +819,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29119003, y: 0.590816}
+  m_Size: {x: 0.12725057, y: 0.5053784}
   m_EdgeRadius: 0
 --- !u!1 &1071902509
 GameObject:
@@ -1040,7 +1040,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152792896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03, z: 0}
   m_LocalScale: {x: 0.10000012, y: 0.10000012, z: 1}
   m_Children: []
   m_Father: {fileID: 2086345526}
@@ -1059,7 +1059,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003532201, y: 0.048441276}
+  m_Offset: {x: 0.007783087, y: 0.052443683}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1070,7 +1070,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30437207, y: 0.5999576}
+  m_Size: {x: 0.1325829, y: 0.50656664}
   m_EdgeRadius: 0
 --- !u!1 &1262511772
 GameObject:
@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerName: BluePlayer
-  m_PlayerSpeedPerSec: 0.2
+  m_PlayerSpeedPerSec: 0.05
   m_LeftTurnKey: 107
   m_RightTurnKey: 108
   m_TrailColor: {r: 0.015686274, g: 0.108285785, b: 1, a: 1}
@@ -1932,7 +1932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerName: RedPlayer
-  m_PlayerSpeedPerSec: 0.2
+  m_PlayerSpeedPerSec: 0.05
   m_LeftTurnKey: 97
   m_RightTurnKey: 115
   m_TrailColor: {r: 0.8679245, g: 0.08597365, b: 0.08597365, a: 1}
