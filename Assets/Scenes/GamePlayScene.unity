@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_PlayerSpeedPerSec: 0.2
   m_LeftTurnKey: 107
   m_RightTurnKey: 108
-  m_TrailColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_TrailColor: {r: 0.015686274, g: 0.108285785, b: 1, a: 1}
   m_TrailWidth: 0.01
 --- !u!50 &2086345528
 Rigidbody2D:
@@ -1935,7 +1935,7 @@ MonoBehaviour:
   m_PlayerSpeedPerSec: 0.2
   m_LeftTurnKey: 97
   m_RightTurnKey: 115
-  m_TrailColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_TrailColor: {r: 0.8679245, g: 0.08597365, b: 0.08597365, a: 1}
   m_TrailWidth: 0.01
 --- !u!50 &2091419713
 Rigidbody2D:
