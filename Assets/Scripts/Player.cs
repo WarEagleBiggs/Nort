@@ -33,26 +33,50 @@ public class Player : MonoBehaviour
 
     public bool IsLiving => m_IsLiving;
 
+    Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
+    Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
+
     private void Start()
     {
         m_IsBeginTrail = true;
     }
 
-    public Button m_RedTop;
-    public Button m_RedBottom;
-    public Button m_BlueTop;
-    public Button m_BlueBottom;
 
-    
-   
+    public void OnTurnLeft()
+    {
+        Debug.Log("turn left");
 
-    //void TaskOnClick()
-    //{
+        Vector3 euler = transform.rotation.eulerAngles;
+        euler.z += 90f;
 
-    //}
+        RotatePlayer(euler);
 
-    Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
-    Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
+        // flag to create a new trail
+        m_IsBeginTrail = true;
+
+        if (m_TrailCollider != null) {
+            // rename trail collider 
+            m_TrailCollider.name = "Trail";
+        }
+    }
+
+    public void OnTurnRight()
+    {
+        Debug.Log("turn right");
+
+        Vector3 euler = transform.rotation.eulerAngles;
+        euler.z -= 90f;
+
+        RotatePlayer(euler);
+
+        // flag to create a new trail
+        m_IsBeginTrail = true;
+
+        if (m_TrailCollider != null) {
+            // rename trail collider 
+            m_TrailCollider.name = "Trail";
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -156,41 +180,23 @@ public class Player : MonoBehaviour
     private void HandleInput()
     {  
         if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
+
             m_IsLeftDown = true;
-            
-            Vector3 euler = transform.rotation.eulerAngles;
-            euler.z += 90f;
 
-            RotatePlayer(euler);
+            // turn player
+            OnTurnLeft();
 
-            // flag to create a new trail
-            m_IsBeginTrail = true;
-
-            if (m_TrailCollider != null) {
-                // rename trail collider 
-                m_TrailCollider.name = "Trail";
-            }
             
         } else if (!Input.GetKey(m_LeftTurnKey)) {
             // clear flag
             m_IsLeftDown = false;
         }
+
         if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
             m_IsRightDown = true;
-            
-            Vector3 euler = transform.rotation.eulerAngles;
-            euler.z -= 90f;
 
-            RotatePlayer(euler);
-
-            // flag to create a new trail
-            m_IsBeginTrail = true;
-
-            if (m_TrailCollider != null) {
-                // rename trail collider 
-                m_TrailCollider.name = "Trail";
-        }
-
+            // turn player
+            OnTurnRight();
 
         } else if (!Input.GetKey(m_RightTurnKey)) {
             // clear flag
@@ -200,10 +206,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //Button btn = RedTop.GetComponent<Button>();
-        //btn.onClick.AddListener(TaskOnClick);
-
-
         if (m_IsLiving) {
             // handle input keys
             HandleInput();
@@ -235,27 +237,3 @@ public class Player : MonoBehaviour
 
     }
 }
-
-
-
-
-//    
-//    public static Bounds FindExtents(GameObject obj)
-//    {
-//        Bounds ret = new Bounds();
-//        ret.max = new Vector3(Mathf.NegativeInfinity, Mathf.NegativeInfinity, Mathf.NegativeInfinity);
-//        ret.min = new Vector3(Mathf.Infinity, Mathf.Infinity, Mathf.Infinity);
-//
-//        foreach (Renderer rend in obj.GetComponentsInChildren(typeof(Renderer), includeInactive: true)) {
-//            ret.Encapsulate(rend.bounds);
-//
-//            Vector3 scale = rend.gameObject.transform.localScale;
-//            ret.SetMinMax(
-//                Vector3.Scale(ret.min, scale),
-//                Vector3.Scale(ret.max, scale));
-//            
-//        }
-//
-//        return ret;
-//    }
-
