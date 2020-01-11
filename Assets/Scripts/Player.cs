@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     public string m_PlayerName = "name";
     public float m_PlayerSpeedPerSec = 0.2f;
 
@@ -35,6 +37,19 @@ public class Player : MonoBehaviour
     {
         m_IsBeginTrail = true;
     }
+
+    public Button m_RedTop;
+    public Button m_RedBottom;
+    public Button m_BlueTop;
+    public Button m_BlueBottom;
+
+    
+   
+
+    //void TaskOnClick()
+    //{
+
+    //}
 
     Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
     Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
@@ -174,7 +189,7 @@ public class Player : MonoBehaviour
             if (m_TrailCollider != null) {
                 // rename trail collider 
                 m_TrailCollider.name = "Trail";
-            }
+        }
 
 
         } else if (!Input.GetKey(m_RightTurnKey)) {
@@ -185,6 +200,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Button btn = RedTop.GetComponent<Button>();
+        //btn.onClick.AddListener(TaskOnClick);
+
+
         if (m_IsLiving) {
             // handle input keys
             HandleInput();
