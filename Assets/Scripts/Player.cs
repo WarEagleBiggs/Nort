@@ -25,11 +25,11 @@ public class Player : MonoBehaviour
 
     private bool m_IsBeginTrail;
 
-    public Color m_TrailColor = Color.yellow;
     public float m_TrailWidth = 0.01f;
     private PolygonCollider2D m_TrailCollider;
 
     private Mesh m_TrailMesh;
+    public Material m_TrailMaterial;
 
     public bool IsLiving => m_IsLiving;
 
@@ -95,10 +95,7 @@ public class Player : MonoBehaviour
         trail.name = m_PlayerName + "Trail";
 
         MeshRenderer renderer = trail.AddComponent<MeshRenderer>();
-        Shader shader = Shader.Find("Unlit/Color");
-        Material mat = new Material(shader);
-        renderer.material = mat;
-        mat.SetColor("_Color", m_TrailColor);
+        renderer.material = m_TrailMaterial;
     
         // 4 vertices for two triangles
         Vector3[] triVerts = new Vector3[4];
