@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 
     private Mesh m_TrailMesh;
     public Material m_TrailMaterial;
+    public float m_TrailZ;
 
     public bool m_IsPlaying;   
 
@@ -107,8 +108,8 @@ public class Player : MonoBehaviour
         
         // position the vertices
         Vector3 startPos = transform.position;
-        startPos.z = -5f;
-        
+        startPos.z = m_TrailZ;
+
         triVerts[0] = startPos - PlayerRightDirection() * m_TrailWidth;
         triVerts[1] = startPos + PlayerRightDirection() * m_TrailWidth;
 
@@ -142,6 +143,8 @@ public class Player : MonoBehaviour
             Vector3[] triVerts = m_TrailMesh.vertices;
 
             Vector3 center = transform.position;
+            center.z = m_TrailZ;
+
 
             triVerts[2] = center - PlayerRightDirection() * m_TrailWidth;
             triVerts[3] = center + PlayerRightDirection() * m_TrailWidth;

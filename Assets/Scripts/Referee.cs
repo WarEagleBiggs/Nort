@@ -26,7 +26,7 @@ public class Referee : MonoBehaviour
     private void Start()
     {
         if (m_ReplayButton != null) {
-            // ensure replay button is not active 
+            // initally ensure replay button is not active 
             m_ReplayButton.SetActive(false);
         }
 
@@ -62,7 +62,15 @@ public class Referee : MonoBehaviour
             case GameState.GameOverState: {
                 // ensure players are stopped
                 StopGameplay();
-            } break;
+
+
+                if (m_ReplayButton != null) {
+                    // show replay button
+                    m_ReplayButton.SetActive(true);
+                }
+
+                }
+                break;
             case GameState.PausedState: {
                 // TODO
             } break;
