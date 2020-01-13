@@ -22,14 +22,18 @@ public class Referee : MonoBehaviour
     private float m_InitialTime;
     public const float c_CountDownSec = 2.0f;
 
+    private void HideRestartButton()
+    {
+        if (m_ReplayButton != null) {
+            // initially ensure replay button is not active 
+            m_ReplayButton.SetActive(false);
+        }
+    }
+    
 
     private void Start()
     {
-        if (m_ReplayButton != null) {
-            // initally ensure replay button is not active 
-            m_ReplayButton.SetActive(false);
-        }
-
+        HideRestartButton();
         m_InitialTime = Time.time;
     }
 
@@ -69,8 +73,7 @@ public class Referee : MonoBehaviour
                     m_ReplayButton.SetActive(true);
                 }
 
-                }
-                break;
+            } break;
             case GameState.PausedState: {
                 // TODO
             } break;
@@ -93,6 +96,18 @@ public class Referee : MonoBehaviour
 
         m_PlayerA.m_IsPlaying = false;
         m_PlayerB.m_IsPlaying = false;
+    }
+
+    public void OnRestart()
+    {
+        m_GameState = GameState.CountDownState;
+        m_InitialTime = Time.time;
+        
+        HideRestartButton();
+
+        m_PlayerA.Restart();
+        m_PlayerB.Restart();
+        
     }
 
 }

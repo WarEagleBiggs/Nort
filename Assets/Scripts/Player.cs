@@ -8,6 +8,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    private Vector3 m_InitialPosition;
+    private Quaternion m_InitialRotation;
+    
     public string m_PlayerName = "name";
     public float m_PlayerSpeedPerSec = 0.2f;
 
@@ -22,7 +25,9 @@ public class Player : MonoBehaviour
 
     // true if player is still alive
     private bool m_IsLiving = true;
-
+    
+    private List<GameObject> m_TrailObjectList;
+    
     private bool m_IsBeginTrail;
 
     public float m_TrailWidth = 0.01f;
@@ -32,8 +37,7 @@ public class Player : MonoBehaviour
     public Material m_TrailMaterial;
     public float m_TrailZ;
 
-    public bool m_IsPlaying;   
-
+    public bool m_IsPlaying;
 
     // --- accessor properties ---
     public bool IsLiving => m_IsLiving;
@@ -44,6 +48,26 @@ public class Player : MonoBehaviour
     private void Start()
     {
         m_IsBeginTrail = true;
+        m_InitialPosition = transform.position;
+        m_InitialRotation = transform.rotation;
+    }
+
+    public void Restart()
+    {
+        foreach (var obj in m_TrailObjectList) {
+            DestroyImmediate(obj);
+        }
+        
+        m_TrailObjectList.Clear();
+        m_TrailCollider = null;
+        m_TrailMesh = null;
+        
+        m_IsBeginTrail = true;
+
+        m_IsLiving = true;
+        
+        transform.position = m_InitialPosition;
+        transform.rotation = m_InitialRotation;
     }
 
     public void OnTurnLeft()
@@ -84,6 +108,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // --- detect collision ---
+        
         if (other.name.Contains(name)) {
             Debug.Log("hitting trail");
         } else { 
@@ -97,6 +123,12 @@ public class Player : MonoBehaviour
         GameObject trail = new GameObject();
         trail.transform.parent = transform.root;
         trail.name = m_PlayerName + "Trail";
+
+        if (m_TrailObjectList == null) {
+            m_TrailObjectList = new List<GameObject>();
+        }
+        
+        m_TrailObjectList.Add(trail);
 
         MeshRenderer renderer = trail.AddComponent<MeshRenderer>();
         renderer.material = m_TrailMaterial;
@@ -172,7 +204,6 @@ public class Player : MonoBehaviour
 
             m_TrailCollider.points = collidePoints;
         }
-
     }
 
     private void RotatePlayer(Vector3 eulerDeg)
@@ -189,7 +220,6 @@ public class Player : MonoBehaviour
             // turn player
             OnTurnLeft();
 
-            
         } else if (!Input.GetKey(m_LeftTurnKey)) {
             // clear flag
             m_IsLeftDown = false;
