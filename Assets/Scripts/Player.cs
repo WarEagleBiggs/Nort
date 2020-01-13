@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
     private Mesh m_TrailMesh;
     public Material m_TrailMaterial;
 
+    public bool m_IsPlaying;   
+
+
+    // --- accessor properties ---
     public bool IsLiving => m_IsLiving;
 
     Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
@@ -40,7 +44,6 @@ public class Player : MonoBehaviour
     {
         m_IsBeginTrail = true;
     }
-
 
     public void OnTurnLeft()
     {
@@ -203,33 +206,36 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (m_IsLiving) {
-            // handle input keys
-            HandleInput();
-        }
+        if (m_IsPlaying) {
 
-        if (m_IsBeginTrail) {
-            // --- start a new trail in this frame ---
-            m_IsBeginTrail = false;
+            if (m_IsLiving) {
+                // handle input keys
+                HandleInput();
+            }
 
-            // back up a bit
-            transform.position += PlayerForwardDirection() * (m_TrailWidth);
+            if (m_IsBeginTrail) {
+                // --- start a new trail in this frame ---
+                m_IsBeginTrail = false;
 
-            // generate mesh for trail
-            AddTrail();
+                // back up a bit
+                transform.position += PlayerForwardDirection() * (m_TrailWidth);
 
-            // restore position
-            transform.position -= PlayerForwardDirection() * (m_TrailWidth);
+                // generate mesh for trail
+                AddTrail();
 
-        }
+                // restore position
+                transform.position -= PlayerForwardDirection() * (m_TrailWidth);
 
-        // update trail vertices based on player position
-        UpdateTrail();
+            }
 
-        if (m_IsLiving) {
-            // --- play is alive, update position ---
-            float speed = m_PlayerSpeedPerSec * Time.deltaTime;
-            transform.position += -PlayerForwardDirection() * speed;
+            // update trail vertices based on player position
+            UpdateTrail();
+
+            if (m_IsLiving) {
+                // --- play is alive, update position ---
+                float speed = m_PlayerSpeedPerSec * Time.deltaTime;
+                transform.position += -PlayerForwardDirection() * speed;
+            }
         }
 
     }
