@@ -20,6 +20,7 @@ public class Referee : MonoBehaviour
     public Player m_PlayerB;
     public GameObject m_ReplayButton;
     public TMPro.TMP_Text m_ScoreTm;
+    public int m_ScoreGoal = 5;
 
     private float m_InitialTime;
     public const float c_CountDownSec = 2.0f;
@@ -61,6 +62,17 @@ public class Referee : MonoBehaviour
         scoreStr += m_PlayerB.m_Score.ToString();
 
         m_ScoreTm.text = scoreStr;
+
+        if (m_PlayerA.m_Score >= m_ScoreGoal || m_PlayerB.m_Score >= m_ScoreGoal) {
+            SceneController.GotoMenu();
+
+        }
+        //int numGames = m_PlayerA.m_Score + m_PlayerB.m_Score;
+
+        //if (numGames >= 10) {
+        //    SceneController.GotoMenu();
+        //}
+
     }
 
     private void MonitorGameState()

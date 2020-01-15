@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public void PlayGame ()
+    static public void PlayGame ()
     {
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        Debug.Log("Clicked");
     }
-    
+
+    static public void GotoMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
 }
