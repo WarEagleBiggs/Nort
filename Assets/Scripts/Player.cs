@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     // true if player is still alive
     private bool m_IsLiving = true;
+
+    public int m_Score;
     
     private List<GameObject> m_TrailObjectList;
     

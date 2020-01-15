@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 enum GameState {
@@ -18,9 +19,11 @@ public class Referee : MonoBehaviour
     public Player m_PlayerA;
     public Player m_PlayerB;
     public GameObject m_ReplayButton;
+    public TMPro.TMP_Text m_ScoreTm;
 
     private float m_InitialTime;
     public const float c_CountDownSec = 2.0f;
+
 
     private void HideRestartButton()
     {
@@ -35,35 +38,57 @@ public class Referee : MonoBehaviour
     {
         HideRestartButton();
         m_InitialTime = Time.time;
+
+        // initial score text
+        m_ScoreTm.text = "0-0";
     }
 
     // Update is called once per frame
     void Update()
     {
+        MonitorGameState();
+
+        UpdateScore();
+
+    }
+
+    private void UpdateScore()
+    {
+        string scoreStr = "";
+
+        scoreStr += m_PlayerA.m_Score.ToString();
+        scoreStr += "-";
+        scoreStr += m_PlayerB.m_Score.ToString();
+
+        m_ScoreTm.text = scoreStr;
+    }
+
+    private void MonitorGameState()
+    {
         switch (m_GameState) {
-            case GameState.CountDownState: {
+            case GameState.CountDownState:
                 if (Time.time > (m_InitialTime + c_CountDownSec)) {
                     // transition to playing state
                     m_GameState = GameState.PlayingState;
                     // start players
                     StartGameplay();
                 }
-            } break;
-            case GameState.PlayingState: {
+                break;
+            case GameState.PlayingState:
 
                 if (m_PlayerA.IsLiving == false) {
-                    Debug.Log(m_PlayerA.name + " Lost");
+                    m_PlayerB.m_Score += 1;
                     m_GameState = GameState.GameOverState;
                 }
 
                 if (m_PlayerB.IsLiving == false) {
-                    Debug.Log(m_PlayerB.name + " Lost");
+                    m_PlayerA.m_Score += 1;
                     m_GameState = GameState.GameOverState;
                 }
 
-            } break;
+                break;
 
-            case GameState.GameOverState: {
+            case GameState.GameOverState:
                 // ensure players are stopped
                 StopGameplay();
 
@@ -73,15 +98,14 @@ public class Referee : MonoBehaviour
                     m_ReplayButton.SetActive(true);
                 }
 
-            } break;
-            case GameState.PausedState: {
+                break;
+            case GameState.PausedState:
                 // TODO
-            } break;
+                break;
         }
-
     }
 
-    private void StartGameplay()
+        private void StartGameplay()
     {
         // --- tell players to start ---
 
