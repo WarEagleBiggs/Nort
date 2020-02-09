@@ -19,8 +19,12 @@ public class Referee : MonoBehaviour
     public Player m_PlayerA;
     public Player m_PlayerB;
     public GameObject m_ReplayButton;
+    public GameObject m_PlayerAwinScreen;
+    public GameObject m_PlayerBwinScreen;
     public TMPro.TMP_Text m_ScoreTm;
+    public TMPro.TMP_Text m_TutorialTm;
     public int m_ScoreGoal = 5;
+ 
 
     private float m_InitialTime;
     public const float c_CountDownSec = 2.0f;
@@ -33,7 +37,16 @@ public class Referee : MonoBehaviour
             m_ReplayButton.SetActive(false);
         }
     }
-    
+
+    IEnumerator ShowTutorial()
+    {
+
+        m_TutorialTm.text = "First To " + m_ScoreGoal + " Wins";
+
+
+        yield return new WaitForSeconds(2.0f);
+        m_TutorialTm.gameObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -42,6 +55,9 @@ public class Referee : MonoBehaviour
 
         // initial score text
         m_ScoreTm.text = "0-0";
+
+        StartCoroutine("ShowTutorial");
+
     }
 
     // Update is called once per frame
@@ -49,11 +65,11 @@ public class Referee : MonoBehaviour
     {
         MonitorGameState();
 
-        UpdateScore();
+        UpdateScoreDisplay();
 
     }
 
-    private void UpdateScore()
+    private void UpdateScoreDisplay()
     {
         string scoreStr = "";
 
