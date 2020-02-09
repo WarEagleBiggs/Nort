@@ -1,0 +1,907 @@
+fileFormatVersion: 2
+guid: ae452284f42182248bae4dd9525c9c08
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4316831602501669005
+    second: starSparkleB_0
+  - first:
+      213: 3765284538460951173
+    second: starSparkleB_1
+  - first:
+      213: -4829070012823994802
+    second: starSparkleB_2
+  - first:
+      213: 2124284417483414663
+    second: starSparkleB_3
+  - first:
+      213: 837795969304467904
+    second: starSparkleB_4
+  - first:
+      213: -4363903663727639296
+    second: starSparkleB_5
+  - first:
+      213: 6564138741371397363
+    second: starSparkleB_6
+  - first:
+      213: 1010418731050883130
+    second: starSparkleB_7
+  - first:
+      213: -910612899706814146
+    second: starSparkleB_8
+  - first:
+      213: 4873526445981790657
+    second: starSparkleB_9
+  - first:
+      213: -4943354460750865100
+    second: starSparkleB_10
+  - first:
+      213: -7828806422711463569
+    second: starSparkleB_11
+  - first:
+      213: 3188849799588702291
+    second: starSparkleB_12
+  - first:
+      213: 6309349602065823432
+    second: starSparkleB_13
+  - first:
+      213: 5901373135673202697
+    second: starSparkleB_14
+  - first:
+      213: 2323922056373439375
+    second: starSparkleB_15
+  - first:
+      213: -3385908581278858756
+    second: starSparkleB_16
+  - first:
+      213: 231971767861113881
+    second: starSparkleB_17
+  - first:
+      213: -5540791894719343901
+    second: starSparkleB_18
+  - first:
+      213: -2407960459689101752
+    second: starSparkleB_19
+  - first:
+      213: 2285523721214772737
+    second: starSparkleB_20
+  - first:
+      213: -8571265574791910428
+    second: starSparkleB_21
+  - first:
+      213: 6580521423944500316
+    second: starSparkleB_22
+  - first:
+      213: -1119002775785074002
+    second: starSparkleB_23
+  - first:
+      213: 3118629289795674223
+    second: starSparkleB_24
+  - first:
+      213: -6645306809446174609
+    second: starSparkleB_25
+  - first:
+      213: 6430060713822238971
+    second: starSparkleB_26
+  - first:
+      213: 6450375908071959877
+    second: starSparkleB_27
+  - first:
+      213: 4271812799771939529
+    second: starSparkleB_28
+  - first:
+      213: -1822923362643130171
+    second: starSparkleB_29
+  - first:
+      213: -4629012234596931524
+    second: starSparkleB_30
+  - first:
+      213: 7013857563096242266
+    second: starSparkleB_31
+  - first:
+      213: 1806005352321584910
+    second: starSparkleB_32
+  - first:
+      213: 2141811084409628303
+    second: starSparkleB_33
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: starSparkleB_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 226
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d80da4e887778eb30800000000000000
+      internalID: 4316831602501669005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 226
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5825c31a65af04430800000000000000
+      internalID: 3765284538460951173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 226
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4e722aa862bbfcb0800000000000000
+      internalID: -4829070012823994802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 226
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78c1ff93c69fa7d10800000000000000
+      internalID: 2124284417483414663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 226
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c995a8cef270ab00800000000000000
+      internalID: 837795969304467904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 196
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0050d712dbc4073c0800000000000000
+      internalID: -4363903663727639296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_6
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 196
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f462df2861881b50800000000000000
+      internalID: 6564138741371397363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_7
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 196
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3850b28b7ab50e00800000000000000
+      internalID: 1010418731050883130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 196
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e314611746adc53f0800000000000000
+      internalID: -910612899706814146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_9
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 196
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c177384b7e32a340800000000000000
+      internalID: 4873526445981790657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 166
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43d1a181f4da56bb0800000000000000
+      internalID: -4943354460750865100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_11
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 166
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f619cfe890e7a5390800000000000000
+      internalID: -7828806422711463569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_12
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 166
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3586f8a5ff1114c20800000000000000
+      internalID: 3188849799588702291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_13
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 166
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c6b2e2e8005f8750800000000000000
+      internalID: 6309349602065823432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_14
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 166
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90895de9993e5e150800000000000000
+      internalID: 5901373135673202697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b85df2cca304020800000000000000
+      internalID: 2323922056373439375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_16
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 136
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf14deaa516d201d0800000000000000
+      internalID: -3385908581278858756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_17
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 136
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 914f7450811283300800000000000000
+      internalID: 231971767861113881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_18
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 136
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e2d3ecc0272b13b0800000000000000
+      internalID: -5540791894719343901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_19
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 136
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8467b0748b4359ed0800000000000000
+      internalID: -2407960459689101752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 106
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1064cb817bfc7bf10800000000000000
+      internalID: 2285523721214772737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_21
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 106
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4eb6efa4f5fbc0980800000000000000
+      internalID: -8571265574791910428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_22
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 106
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c544f07be55b25b50800000000000000
+      internalID: 6580521423944500316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_23
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 106
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea297a677e08870f0800000000000000
+      internalID: -1119002775785074002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_24
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 106
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f60666cd0d8974b20800000000000000
+      internalID: 3118629289795674223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 76
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f60f9774aa027c3a0800000000000000
+      internalID: -6645306809446174609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_26
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 76
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf8b19bb62a2c3950800000000000000
+      internalID: 6430060713822238971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_27
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 76
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54ded5c76b6548950800000000000000
+      internalID: 6450375908071959877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_28
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 76
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c29f5dbb17884b30800000000000000
+      internalID: 4271812799771939529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_29
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 76
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c845e42cdca3b6e0800000000000000
+      internalID: -1822923362643130171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 46
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c38a9efe5e172cfb0800000000000000
+      internalID: -4629012234596931524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_31
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 46
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a58d989ea4a365160800000000000000
+      internalID: 7013857563096242266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_32
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 46
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0f059f9c48301910800000000000000
+      internalID: 1806005352321584910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starSparkleB_33
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 46
+        width: 50
+        height: 30
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f86ea3e55dd39bd10800000000000000
+      internalID: 2141811084409628303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

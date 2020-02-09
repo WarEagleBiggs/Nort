@@ -1,0 +1,595 @@
+fileFormatVersion: 2
+guid: 9a556d541bf408d45b61a1e69478d542
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4602110521939760083
+    second: sparkRocksA_0
+  - first:
+      213: -928749851808113664
+    second: sparkRocksA_1
+  - first:
+      213: -6170562495705839909
+    second: sparkRocksA_2
+  - first:
+      213: -3057304627220060419
+    second: sparkRocksA_3
+  - first:
+      213: -8266819263787692985
+    second: sparkRocksA_4
+  - first:
+      213: 3342029238963017491
+    second: sparkRocksA_5
+  - first:
+      213: 5141582032833165242
+    second: sparkRocksA_6
+  - first:
+      213: -5002491432609926773
+    second: sparkRocksA_7
+  - first:
+      213: 6821589698313624004
+    second: sparkRocksA_8
+  - first:
+      213: -6806784246017362551
+    second: sparkRocksA_9
+  - first:
+      213: -7799145142199858532
+    second: sparkRocksA_10
+  - first:
+      213: 3067603399566611124
+    second: sparkRocksA_11
+  - first:
+      213: 4191636010486548534
+    second: sparkRocksA_12
+  - first:
+      213: 7485948105325760849
+    second: sparkRocksA_13
+  - first:
+      213: -2573928010032027136
+    second: sparkRocksA_14
+  - first:
+      213: -224075556261564032
+    second: sparkRocksA_15
+  - first:
+      213: 5435557721687483478
+    second: sparkRocksA_16
+  - first:
+      213: -5798729106698699250
+    second: sparkRocksA_17
+  - first:
+      213: -7455513252150456468
+    second: sparkRocksA_18
+  - first:
+      213: 648262299358241545
+    second: sparkRocksA_19
+  - first:
+      213: 1417222570737822384
+    second: sparkRocksA_20
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sparkRocksA_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 442
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2c61b20dd40220c0800000000000000
+      internalID: -4602110521939760083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 442
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00cd7c53eea6c13f0800000000000000
+      internalID: -928749851808113664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 442
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd60b1b6a12cd5aa0800000000000000
+      internalID: -6170562495705839909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 372
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df6e36cc3a54295d0800000000000000
+      internalID: -3057304627220060419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 372
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c0497ddab564d80800000000000000
+      internalID: -8266819263787692985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 372
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3171c51d2e5416e20800000000000000
+      internalID: 3342029238963017491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 302
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab73d8a1e919a5740800000000000000
+      internalID: 5141582032833165242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_7
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 302
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81b95fdb84939ab0800000000000000
+      internalID: -5002491432609926773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 302
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c9927330b72bae50800000000000000
+      internalID: 6821589698313624004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 232
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985f869cac17981a0800000000000000
+      internalID: -6806784246017362551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 232
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9ac67790ded3c390800000000000000
+      internalID: -7799145142199858532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_11
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 232
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2d2fef901529a20800000000000000
+      internalID: 3067603399566611124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 162
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63849c84ebeab2a30800000000000000
+      internalID: 4191636010486548534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 162
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15153f8b32e63e760800000000000000
+      internalID: 7485948105325760849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_14
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 162
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00aec94bc12974cd0800000000000000
+      internalID: -2573928010032027136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 92
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0817e22087ce3ecf0800000000000000
+      internalID: -224075556261564032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 92
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6546055f2fafe6b40800000000000000
+      internalID: 5435557721687483478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_17
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 92
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0e7186b996c68fa0800000000000000
+      internalID: -5798729106698699250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 22
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6fca5bb232b88890800000000000000
+      internalID: -7455513252150456468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_19
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 22
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903a68a60271ff800800000000000000
+      internalID: 648262299358241545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkRocksA_20
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 22
+        width: 160
+        height: 70
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ba6e785b6cfaa310800000000000000
+      internalID: 1417222570737822384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

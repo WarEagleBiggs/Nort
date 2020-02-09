@@ -1,0 +1,571 @@
+fileFormatVersion: 2
+guid: 17f83de66d36e8944a575c6c4446ef18
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 946335895061590772
+    second: sparkSmokeA_0
+  - first:
+      213: -2046553015522485047
+    second: sparkSmokeA_1
+  - first:
+      213: 8096693756844235780
+    second: sparkSmokeA_2
+  - first:
+      213: 1583165409813420849
+    second: sparkSmokeA_3
+  - first:
+      213: -8972041017378556127
+    second: sparkSmokeA_4
+  - first:
+      213: 1151324089307362913
+    second: sparkSmokeA_5
+  - first:
+      213: 1801466641511224282
+    second: sparkSmokeA_6
+  - first:
+      213: -9110924992826200621
+    second: sparkSmokeA_7
+  - first:
+      213: 4169134288549042167
+    second: sparkSmokeA_8
+  - first:
+      213: 2521314965546312027
+    second: sparkSmokeA_9
+  - first:
+      213: -6872746803353611327
+    second: sparkSmokeA_10
+  - first:
+      213: 2624609000740881129
+    second: sparkSmokeA_11
+  - first:
+      213: -5645013729078858444
+    second: sparkSmokeA_12
+  - first:
+      213: -4989951770350557223
+    second: sparkSmokeA_13
+  - first:
+      213: 1639106857317589644
+    second: sparkSmokeA_14
+  - first:
+      213: -7608834164118487007
+    second: sparkSmokeA_15
+  - first:
+      213: 90734624621542687
+    second: sparkSmokeA_16
+  - first:
+      213: 9056844054660207680
+    second: sparkSmokeA_17
+  - first:
+      213: -5372869198285532783
+    second: sparkSmokeA_18
+  - first:
+      213: 6853451960806470597
+    second: sparkSmokeA_19
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sparkSmokeA_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 410
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2f85f8b7f022d00800000000000000
+      internalID: 946335895061590772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_1
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 410
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc17cf10ee2993e0800000000000000
+      internalID: -2046553015522485047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_2
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 410
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40cd2dfd21c3d5070800000000000000
+      internalID: 8096693756844235780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_3
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 410
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13b5d906d8888f510800000000000000
+      internalID: 1583165409813420849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_4
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 410
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 127bae80b38ec7380800000000000000
+      internalID: -8972041017378556127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 308
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166f384c8235aff00800000000000000
+      internalID: 1151324089307362913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_6
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 308
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad31ef9ad58100910800000000000000
+      internalID: 1801466641511224282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_7
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 308
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ddad53adfd7f8180800000000000000
+      internalID: -9110924992826200621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_8
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 308
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f7ddd1eb8dbbd930800000000000000
+      internalID: 4169134288549042167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_9
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 308
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b51a3484a928df220800000000000000
+      internalID: 2521314965546312027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 206
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c318ea12391f90a0800000000000000
+      internalID: -6872746803353611327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_11
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 206
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e2047bfafb7c6420800000000000000
+      internalID: 2624609000740881129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_12
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 206
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43d2d060ce1e8a1b0800000000000000
+      internalID: -5645013729078858444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_13
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 206
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d76ce18d4120cab0800000000000000
+      internalID: -4989951770350557223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_14
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 206
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c82625b90074fb610800000000000000
+      internalID: 1639106857317589644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 104
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1208cdc14adf76690800000000000000
+      internalID: -7608834164118487007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_16
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 104
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1d356d09aa524100800000000000000
+      internalID: 90734624621542687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_17
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 104
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0445128beaf50bd70800000000000000
+      internalID: 9056844054660207680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_18
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 104
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1919d8b4eebbf65b0800000000000000
+      internalID: -5372869198285532783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sparkSmokeA_19
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 104
+        width: 102
+        height: 102
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c3f2194f3a5c1f50800000000000000
+      internalID: 6853451960806470597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

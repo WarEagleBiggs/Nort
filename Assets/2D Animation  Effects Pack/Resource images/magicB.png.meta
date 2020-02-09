@@ -1,0 +1,763 @@
+fileFormatVersion: 2
+guid: 97555e34f93fbee42ad97fe27edc4290
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3969493681917995404
+    second: magicB_0
+  - first:
+      213: -7236849145823657582
+    second: magicB_1
+  - first:
+      213: -6907549429056239974
+    second: magicB_2
+  - first:
+      213: 4597453891056395035
+    second: magicB_3
+  - first:
+      213: -1846906783858918118
+    second: magicB_4
+  - first:
+      213: -9184093487042981630
+    second: magicB_5
+  - first:
+      213: -7499556785500058614
+    second: magicB_6
+  - first:
+      213: -4044260922569342230
+    second: magicB_7
+  - first:
+      213: 2364464040286045451
+    second: magicB_8
+  - first:
+      213: -7154143519738960143
+    second: magicB_9
+  - first:
+      213: -7247148118995808038
+    second: magicB_10
+  - first:
+      213: -823002177264632335
+    second: magicB_11
+  - first:
+      213: 8408724276486422554
+    second: magicB_12
+  - first:
+      213: -7304895928331821666
+    second: magicB_13
+  - first:
+      213: 4711667164544277957
+    second: magicB_14
+  - first:
+      213: 463387057478693012
+    second: magicB_15
+  - first:
+      213: -6670732959852665071
+    second: magicB_16
+  - first:
+      213: 6101937878749270831
+    second: magicB_17
+  - first:
+      213: -1661516343094578408
+    second: magicB_18
+  - first:
+      213: -5377849654531369587
+    second: magicB_19
+  - first:
+      213: -7045584993486848364
+    second: magicB_20
+  - first:
+      213: 2073006531417516554
+    second: magicB_21
+  - first:
+      213: -2758673160025324054
+    second: magicB_22
+  - first:
+      213: -3324427858300929079
+    second: magicB_23
+  - first:
+      213: 5670944273121695314
+    second: magicB_24
+  - first:
+      213: 8911342407569362871
+    second: magicB_25
+  - first:
+      213: 7605296648149353914
+    second: magicB_26
+  - first:
+      213: 4246743848978021194
+    second: magicB_27
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: magicB_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8921e0f879761730800000000000000
+      internalID: 3969493681917995404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 291871a5b0c819b90800000000000000
+      internalID: -7236849145823657582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_2
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9686ac54647320a0800000000000000
+      internalID: -6907549429056239974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_3
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1367af94ff6dcf30800000000000000
+      internalID: 4597453891056395035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1d74deb0187e56e0800000000000000
+      internalID: -1846906783858918118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20113d802ab8b8080800000000000000
+      internalID: -9184093487042981630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_6
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c066386d83ce790800000000000000
+      internalID: -7499556785500058614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_7
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 192
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae2c24b4e16efd7c0800000000000000
+      internalID: -4044260922569342230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b054f65648340d020800000000000000
+      internalID: 2364464040286045451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_9
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f6ebc18f5067bc90800000000000000
+      internalID: -7154143519738960143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_10
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad05d9cce25fc6b90800000000000000
+      internalID: -7247148118995808038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_11
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fdb4c651eb1494f0800000000000000
+      internalID: -823002177264632335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_12
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a104d2a9d2ac1b470800000000000000
+      internalID: 8408724276486422554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_13
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9d959e2bdbcf9a90800000000000000
+      internalID: -7304895928331821666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_14
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cd988a9254336140800000000000000
+      internalID: 4711667164544277957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_15
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 128
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 490f78ad2184e6600800000000000000
+      internalID: 463387057478693012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 117ed7057bbcc63a0800000000000000
+      internalID: -6670732959852665071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_17
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23d958db207ea450800000000000000
+      internalID: 6101937878749270831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_18
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 813775560bb11f8e0800000000000000
+      internalID: -1661516343094578408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_19
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8553367b3a0e55b0800000000000000
+      internalID: -5377849654531369587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_20
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49eb46c07cd093e90800000000000000
+      internalID: -7045584993486848364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_21
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0aa432057cc4cc10800000000000000
+      internalID: 2073006531417516554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_22
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae54945806937b9d0800000000000000
+      internalID: -2758673160025324054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_23
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 64
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb7f88f9724dd1d0800000000000000
+      internalID: -3324427858300929079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256547c35cd33be40800000000000000
+      internalID: 5670944273121695314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_25
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bfcb0394b27bab70800000000000000
+      internalID: 8911342407569362871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_26
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab54964c1017b8960800000000000000
+      internalID: 7605296648149353914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magicB_27
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 30
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4bf86ac7077fea30800000000000000
+      internalID: 4246743848978021194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
