@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 
 enum GameState {
-    CountDownState = 0,
+    CountDownToStartState = 0,
     PlayingState,
     PausedState,
     TiedState,
@@ -16,7 +16,7 @@ enum GameState {
 
 public class Referee : MonoBehaviour
 {
-    private GameState m_GameState = GameState.CountDownState;
+    private GameState m_GameState = GameState.CountDownToStartState;
 
     public Player m_PlayerA;
     public Player m_PlayerB;
@@ -29,10 +29,13 @@ public class Referee : MonoBehaviour
     public TMPro.TMP_Text m_ScoreTm;
     public TMPro.TMP_Text m_TutorialTm;
     public int m_ScoreGoal = 5;
+
  
 
     private float m_InitialTime;
-    public const float c_CountDownSec = 2.0f;
+    public const float c_CountDownSec = 1.0f;
+    public const float c_ReplayDelaySec = 1.0f;
+    public const float c_ImageShowDurationSec = 2.0f;
 
 
     private void HideRestartButton()
@@ -59,7 +62,16 @@ public class Referee : MonoBehaviour
         // hide object
         obj.SetActive(false);
     }
-    
+
+    IEnumerator DelayReplay(float durationSec = 2.0f)
+    {
+        // wait for duration 
+        yield return new WaitForSeconds(durationSec);
+        // restart
+        OnReplay();
+    }
+
+
     private void Start()
     {
         HideRestartButton();
@@ -106,7 +118,7 @@ public class Referee : MonoBehaviour
     private void MonitorGameState()
     {
         switch (m_GameState) {
-            case GameState.CountDownState:
+            case GameState.CountDownToStartState:
                 if (Time.time > (m_InitialTime + c_CountDownSec)) {
                     // transition to playing state
                     m_GameState = GameState.PlayingState;
@@ -119,7 +131,8 @@ public class Referee : MonoBehaviour
                 if (m_PlayerA.IsLiving == false && m_PlayerB.IsLiving == false) {
                     // --- both players just died! ---
 
-                    StartCoroutine(ShowSprite(obj: m_TiedImage));
+                    StartCoroutine(ShowSprite(obj: m_TiedImage,
+                        durationSec: c_ImageShowDurationSec));
                     m_GameState = GameState.TiedState;
 
                 } else {
@@ -129,14 +142,16 @@ public class Referee : MonoBehaviour
                         // --- player A is dead ---
                         m_PlayerB.m_Score += 1;
                         m_GameState = GameState.ScoredState;
-                        StartCoroutine(ShowSprite(obj: m_PlayerBScoredImage));
+                        StartCoroutine(ShowSprite(obj: m_PlayerBScoredImage,
+                            durationSec: c_ImageShowDurationSec));
                     }
 
                     if (m_PlayerB.IsLiving == false) {
                         // --- player B is dead ---
                         m_PlayerA.m_Score += 1;
                         m_GameState = GameState.ScoredState;
-                        StartCoroutine(ShowSprite(obj: m_PlayerAScoredImage));
+                        StartCoroutine(ShowSprite(obj: m_PlayerAScoredImage,
+                            durationSec: c_ImageShowDurationSec));
                     }
                 }
 
@@ -153,15 +168,16 @@ public class Referee : MonoBehaviour
                 break;
 
             case GameState.TiedState:
-                // TODO display tied
-                m_GameState = GameState.GameOverState;
+                // start coroutine to delay replay
+                StartCoroutine(DelayReplay(c_ReplayDelaySec));
 
                 break;
             case GameState.ScoredState:
                 // ensure players are stopped
                 StopGameplay();
 
-                // TODO display who scored
+                // start coroutine to delay replay
+                StartCoroutine(DelayReplay(c_ReplayDelaySec));
 
 
                 break;
@@ -188,9 +204,9 @@ public class Referee : MonoBehaviour
         m_PlayerB.m_IsPlaying = false;
     }
 
-    public void OnRestart()
+    public void OnReplay()
     {
-        m_GameState = GameState.CountDownState;
+        m_GameState = GameState.CountDownToStartState;
         m_InitialTime = Time.time;
         
         HideRestartButton();
