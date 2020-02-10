@@ -8,8 +8,7 @@ enum GameState {
     CountDownToStartState = 0,
     PlayingState,
     PausedState,
-    TiedState,
-    ScoredState,
+    EndOfRoundState,
     GameOverState
 }
 
@@ -103,10 +102,10 @@ public class Referee : MonoBehaviour
 
         m_ScoreTm.text = scoreStr;
 
-        if (m_PlayerA.m_Score >= m_ScoreGoal || m_PlayerB.m_Score >= m_ScoreGoal) {
-            SceneController.GotoMenu();
+        //if (m_PlayerA.m_Score >= m_ScoreGoal || m_PlayerB.m_Score >= m_ScoreGoal) {
+        //    SceneController.GotoMenu();
 
-        }
+        //}
         //int numGames = m_PlayerA.m_Score + m_PlayerB.m_Score;
 
         //if (numGames >= 10) {
@@ -133,7 +132,7 @@ public class Referee : MonoBehaviour
 
                     StartCoroutine(ShowSprite(obj: m_TiedImage,
                         durationSec: c_ImageShowDurationSec));
-                    m_GameState = GameState.TiedState;
+                    m_GameState = GameState.EndOfRoundState;
 
                 } else {
                     // --- one player is still alive ---
@@ -141,17 +140,23 @@ public class Referee : MonoBehaviour
                     if (m_PlayerA.IsLiving == false) {
                         // --- player A is dead ---
                         m_PlayerB.m_Score += 1;
-                        m_GameState = GameState.ScoredState;
-                        StartCoroutine(ShowSprite(obj: m_PlayerBScoredImage,
-                            durationSec: c_ImageShowDurationSec));
+                        m_GameState = GameState.EndOfRoundState;
+                        if (m_PlayerB.m_Score < m_ScoreGoal) {
+                            // player B has not won yet, display round win
+                            StartCoroutine(ShowSprite(obj: m_PlayerBScoredImage,
+                                durationSec: c_ImageShowDurationSec));
+                        }
                     }
 
                     if (m_PlayerB.IsLiving == false) {
                         // --- player B is dead ---
                         m_PlayerA.m_Score += 1;
-                        m_GameState = GameState.ScoredState;
-                        StartCoroutine(ShowSprite(obj: m_PlayerAScoredImage,
-                            durationSec: c_ImageShowDurationSec));
+                        m_GameState = GameState.EndOfRoundState;
+                        if (m_PlayerA.m_Score < m_ScoreGoal) {
+                            // player A has not won yet, display round win
+                            StartCoroutine(ShowSprite(obj: m_PlayerAScoredImage,
+                                durationSec: c_ImageShowDurationSec));
+                        }
                     }
                 }
 
@@ -167,18 +172,29 @@ public class Referee : MonoBehaviour
 
                 break;
 
-            case GameState.TiedState:
-                // start coroutine to delay replay
-                StartCoroutine(DelayReplay(c_ReplayDelaySec));
+            case GameState.EndOfRoundState:
 
-                break;
-            case GameState.ScoredState:
                 // ensure players are stopped
                 StopGameplay();
 
-                // start coroutine to delay replay
-                StartCoroutine(DelayReplay(c_ReplayDelaySec));
+                if (m_PlayerA.m_Score >= m_ScoreGoal) {
+                    // --- player A won! ---
+                    StartCoroutine(ShowSprite(m_PlayerAWinImage,
+                        durationSec: c_ImageShowDurationSec));
+                    m_GameState = GameState.GameOverState;
+                }
 
+                if (m_PlayerB.m_Score >= m_ScoreGoal) {
+                    // --- player B won! ---
+                    StartCoroutine(ShowSprite(m_PlayerBWinImage,
+                        durationSec: c_ImageShowDurationSec));
+                    m_GameState = GameState.GameOverState;
+                }
+
+                if (m_GameState != GameState.GameOverState) {
+                    // start coroutine to delay replay
+                    StartCoroutine(DelayReplay(c_ReplayDelaySec));
+                }
 
                 break;
             case GameState.PausedState:
@@ -187,7 +203,7 @@ public class Referee : MonoBehaviour
         }
     }
 
-        private void StartGameplay()
+    private void StartGameplay()
     {
         // --- tell players to start ---
 
@@ -204,8 +220,13 @@ public class Referee : MonoBehaviour
         m_PlayerB.m_IsPlaying = false;
     }
 
-    public void OnReplay()
+    public void OnReplay(bool isClearGame = false)
     {
+        if (isClearGame) {
+            m_PlayerA.m_Score = 0;
+            m_PlayerB.m_Score = 0;
+        }
+
         m_GameState = GameState.CountDownToStartState;
         m_InitialTime = Time.time;
         
