@@ -8,6 +8,8 @@ enum GameState {
     CountDownState = 0,
     PlayingState,
     PausedState,
+    TiedState,
+    ScoredState,
     GameOverState
 }
 
@@ -19,8 +21,11 @@ public class Referee : MonoBehaviour
     public Player m_PlayerA;
     public Player m_PlayerB;
     public GameObject m_ReplayButton;
-    public GameObject m_PlayerAwinScreen;
-    public GameObject m_PlayerBwinScreen;
+    public GameObject m_PlayerAWinImage;
+    public GameObject m_PlayerBWinImage;
+    public GameObject m_PlayerAScoredImage;
+    public GameObject m_PlayerBScoredImage;
+    public GameObject m_TiedImage;
     public TMPro.TMP_Text m_ScoreTm;
     public TMPro.TMP_Text m_TutorialTm;
     public int m_ScoreGoal = 5;
@@ -40,14 +45,21 @@ public class Referee : MonoBehaviour
 
     IEnumerator ShowTutorial()
     {
-
         m_TutorialTm.text = "First To " + m_ScoreGoal + " Wins";
-
-
         yield return new WaitForSeconds(2.0f);
         m_TutorialTm.gameObject.SetActive(false);
     }
 
+    IEnumerator ShowSprite(GameObject obj, float durationSec = 2.0f)
+    {
+        // show object
+        obj.SetActive(true);
+        // wait for duration 
+        yield return new WaitForSeconds(durationSec);
+        // hide object
+        obj.SetActive(false);
+    }
+    
     private void Start()
     {
         HideRestartButton();
@@ -56,7 +68,7 @@ public class Referee : MonoBehaviour
         // initial score text
         m_ScoreTm.text = "0-0";
 
-        StartCoroutine("ShowTutorial");
+        StartCoroutine(ShowTutorial());
 
     }
 
@@ -104,27 +116,53 @@ public class Referee : MonoBehaviour
                 break;
             case GameState.PlayingState:
 
-                if (m_PlayerA.IsLiving == false) {
-                    m_PlayerB.m_Score += 1;
-                    m_GameState = GameState.GameOverState;
-                }
+                if (m_PlayerA.IsLiving == false && m_PlayerB.IsLiving == false) {
+                    // --- both players just died! ---
 
-                if (m_PlayerB.IsLiving == false) {
-                    m_PlayerA.m_Score += 1;
-                    m_GameState = GameState.GameOverState;
+                    StartCoroutine(ShowSprite(obj: m_TiedImage));
+                    m_GameState = GameState.TiedState;
+
+                } else {
+                    // --- one player is still alive ---
+
+                    if (m_PlayerA.IsLiving == false) {
+                        // --- player A is dead ---
+                        m_PlayerB.m_Score += 1;
+                        m_GameState = GameState.ScoredState;
+                        StartCoroutine(ShowSprite(obj: m_PlayerBScoredImage));
+                    }
+
+                    if (m_PlayerB.IsLiving == false) {
+                        // --- player B is dead ---
+                        m_PlayerA.m_Score += 1;
+                        m_GameState = GameState.ScoredState;
+                        StartCoroutine(ShowSprite(obj: m_PlayerAScoredImage));
+                    }
                 }
 
                 break;
 
             case GameState.GameOverState:
-                // ensure players are stopped
-                StopGameplay();
-
+                // --- handle game over ---
 
                 if (m_ReplayButton != null) {
                     // show replay button
                     m_ReplayButton.SetActive(true);
                 }
+
+                break;
+
+            case GameState.TiedState:
+                // TODO display tied
+                m_GameState = GameState.GameOverState;
+
+                break;
+            case GameState.ScoredState:
+                // ensure players are stopped
+                StopGameplay();
+
+                // TODO display who scored
+
 
                 break;
             case GameState.PausedState:
