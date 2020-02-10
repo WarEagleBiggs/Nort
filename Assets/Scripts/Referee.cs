@@ -79,10 +79,13 @@ public class Referee : MonoBehaviour
         OnReplay();
     }
 
-
     private void Start()
     {
+        // ensure players are stopped
+        StopGameplay();
+
         HideRestartButton();
+        
         m_InitialTime = Time.time;
 
         // initial score text
@@ -110,17 +113,6 @@ public class Referee : MonoBehaviour
         scoreStr += m_PlayerB.m_Score.ToString();
 
         m_ScoreTm.text = scoreStr;
-
-        //if (m_PlayerA.m_Score >= m_ScoreGoal || m_PlayerB.m_Score >= m_ScoreGoal) {
-        //    SceneController.GotoMenu();
-
-        //}
-        //int numGames = m_PlayerA.m_Score + m_PlayerB.m_Score;
-
-        //if (numGames >= 10) {
-        //    SceneController.GotoMenu();
-        //}
-
     }
 
     private void MonitorGameState()
@@ -182,7 +174,8 @@ public class Referee : MonoBehaviour
                 break;
 
             case GameState.EndOfRoundState:
-
+                // --- round is over, check game state ---
+                
                 // ensure players are stopped
                 StopGameplay();
 
@@ -195,10 +188,7 @@ public class Referee : MonoBehaviour
 
                 break;
             case GameState.PausedState:
-                // TODO
-
-
-
+                // nothing to do here
                 break;
         }
     }
@@ -218,9 +208,7 @@ public class Referee : MonoBehaviour
                 durationSec: 0.0f));
             m_GameState = GameState.GameOverState;
         }
-
     }
-
 
     private void StartGameplay()
     {
@@ -228,7 +216,6 @@ public class Referee : MonoBehaviour
 
         m_PlayerA.m_IsPlaying = true;
         m_PlayerB.m_IsPlaying = true;
-
     }
 
     private void StopGameplay()
@@ -242,8 +229,7 @@ public class Referee : MonoBehaviour
     public void OnPause()
     {
         if (m_GameState == GameState.PlayingState) {
-            m_PlayerA.m_IsPlaying = false;
-            m_PlayerB.m_IsPlaying = false;
+            StopGameplay();
             m_ResumeButton.SetActive(true);
             m_ExitMenuButton.SetActive(true);
             m_GameState = GameState.PausedState;
@@ -255,8 +241,7 @@ public class Referee : MonoBehaviour
         if (m_GameState == GameState.PausedState) {
             m_ExitMenuButton.SetActive(false);
             m_ResumeButton.SetActive(false);
-            m_PlayerA.m_IsPlaying = true;
-            m_PlayerB.m_IsPlaying = true;
+            StartGameplay();
             m_GameState = GameState.PlayingState;
         }
     }
@@ -277,7 +262,5 @@ public class Referee : MonoBehaviour
 
         m_PlayerA.Restart();
         m_PlayerB.Restart();
-        
     }
-
 }
