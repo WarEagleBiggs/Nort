@@ -24,6 +24,9 @@ public class Referee : MonoBehaviour
     public GameObject m_PlayerBWinImage;
     public GameObject m_PlayerAScoredImage;
     public GameObject m_PlayerBScoredImage;
+    public GameObject m_ExitMenuButton;
+    public GameObject m_ResumeButton;
+
     public GameObject m_TiedImage;
     public TMPro.TMP_Text m_ScoreTm;
     public TMPro.TMP_Text m_TutorialTm;
@@ -56,10 +59,16 @@ public class Referee : MonoBehaviour
     {
         // show object
         obj.SetActive(true);
-        // wait for duration 
-        yield return new WaitForSeconds(durationSec);
-        // hide object
-        obj.SetActive(false);
+
+        if (Mathf.Approximately(durationSec, 0.0f)) {
+            // duration is zero, exit
+            yield return null;
+        } else {
+            // wait for duration 
+            yield return new WaitForSeconds(durationSec);
+            // hide object
+            obj.SetActive(false);
+        }
     }
 
     IEnumerator DelayReplay(float durationSec = 2.0f)
@@ -177,19 +186,7 @@ public class Referee : MonoBehaviour
                 // ensure players are stopped
                 StopGameplay();
 
-                if (m_PlayerA.m_Score >= m_ScoreGoal) {
-                    // --- player A won! ---
-                    StartCoroutine(ShowSprite(m_PlayerAWinImage,
-                        durationSec: c_ImageShowDurationSec));
-                    m_GameState = GameState.GameOverState;
-                }
-
-                if (m_PlayerB.m_Score >= m_ScoreGoal) {
-                    // --- player B won! ---
-                    StartCoroutine(ShowSprite(m_PlayerBWinImage,
-                        durationSec: c_ImageShowDurationSec));
-                    m_GameState = GameState.GameOverState;
-                }
+                CheckForGameComplete();
 
                 if (m_GameState != GameState.GameOverState) {
                     // start coroutine to delay replay
@@ -199,9 +196,31 @@ public class Referee : MonoBehaviour
                 break;
             case GameState.PausedState:
                 // TODO
+
+
+
                 break;
         }
     }
+
+    private void CheckForGameComplete()
+    {
+        if (m_PlayerA.m_Score >= m_ScoreGoal) {
+            // --- player A won!, show and don't hide ---
+            StartCoroutine(ShowSprite(m_PlayerAWinImage,
+                durationSec: 0.0f));
+            m_GameState = GameState.GameOverState;
+        }
+
+        if (m_PlayerB.m_Score >= m_ScoreGoal) {
+            // --- player B won!, show and don't hide ---
+            StartCoroutine(ShowSprite(m_PlayerBWinImage,
+                durationSec: 0.0f));
+            m_GameState = GameState.GameOverState;
+        }
+
+    }
+
 
     private void StartGameplay()
     {
@@ -220,11 +239,35 @@ public class Referee : MonoBehaviour
         m_PlayerB.m_IsPlaying = false;
     }
 
+    public void OnPause()
+    {
+        if (m_GameState == GameState.PlayingState) {
+            m_PlayerA.m_IsPlaying = false;
+            m_PlayerB.m_IsPlaying = false;
+            m_ResumeButton.SetActive(true);
+            m_ExitMenuButton.SetActive(true);
+            m_GameState = GameState.PausedState;
+        }
+    }
+
+    public void OnResume()
+    {
+        if (m_GameState == GameState.PausedState) {
+            m_ExitMenuButton.SetActive(false);
+            m_ResumeButton.SetActive(false);
+            m_PlayerA.m_IsPlaying = true;
+            m_PlayerB.m_IsPlaying = true;
+            m_GameState = GameState.PlayingState;
+        }
+    }
+
     public void OnReplay(bool isClearGame = false)
     {
         if (isClearGame) {
             m_PlayerA.m_Score = 0;
             m_PlayerB.m_Score = 0;
+            m_PlayerAWinImage.SetActive(false);
+            m_PlayerBWinImage.SetActive(false);
         }
 
         m_GameState = GameState.CountDownToStartState;
