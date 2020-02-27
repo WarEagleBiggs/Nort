@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     private Vector3 m_InitialPosition;
     private Quaternion m_InitialRotation;
     
@@ -75,8 +74,6 @@ public class Player : MonoBehaviour
 
     public void OnTurnLeft()
     {
-        Debug.Log("turn left");
-
         Vector3 euler = transform.rotation.eulerAngles;
         euler.z += 90f;
 
@@ -93,8 +90,6 @@ public class Player : MonoBehaviour
 
     public void OnTurnRight()
     {
-        Debug.Log("turn right");
-
         Vector3 euler = transform.rotation.eulerAngles;
         euler.z -= 90f;
 
