@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private List<GameObject> m_TrailObjectList;
     
     private bool m_IsBeginTrail;
-    private Animator m_Animator;
+    public Animator m_Animator;
 
     public float m_TrailWidth = 0.01f;
     private PolygonCollider2D m_TrailCollider;
@@ -53,11 +53,6 @@ public class Player : MonoBehaviour
         m_IsBeginTrail = true;
         m_InitialPosition = transform.position;
         m_InitialRotation = transform.rotation;
-
-        if (transform.childCount > 0) {
-            // find animator object from child sprite
-            m_Animator = transform.GetChild(0).GetComponent<Animator>();
-        }
     }
 
     public void Restart()
