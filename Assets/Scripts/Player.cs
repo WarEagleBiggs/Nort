@@ -7,6 +7,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private enum CardinalDirection
+    {
+        North = 0,
+        South,
+        East,
+        West
+    }
+
     private Vector3 m_InitialPosition;
     private Quaternion m_InitialRotation;
     
@@ -22,6 +30,9 @@ public class Player : MonoBehaviour
     readonly Vector3 m_ForwardVec = new Vector3(0f, 1f, 0f);
     readonly Vector3 m_RightVec = new Vector3(1f, 0f, 0f);
 
+    // current player direction
+    private CardinalDirection m_Direction = CardinalDirection.North;
+    
     // true if player is still alive
     private bool m_IsLiving = true;
 
@@ -50,6 +61,10 @@ public class Player : MonoBehaviour
     private void Start()
     {
         m_IsBeginTrail = true;
+
+        // ensure starting direction is Cardinal
+        InitStartingDirection();
+
         m_InitialPosition = transform.position;
         m_InitialRotation = transform.rotation;
     }
@@ -72,13 +87,89 @@ public class Player : MonoBehaviour
         transform.rotation = m_InitialRotation;
     }
 
+    public float DiffAngleRad(float xRad, float yRad)
+    {
+        return Mathf.Atan2(
+            Mathf.Sin(xRad - yRad), 
+            Mathf.Cos(xRad - yRad));
+    }
+
+    private bool DiffAngleIsSame(float xDeg, float yDeg, float epsilonDeg = 1.0f)
+    {
+        bool ret = false;
+        
+        float diffRad = DiffAngleRad(Mathf.Deg2Rad * xDeg, Mathf.Deg2Rad * yDeg);
+        
+        if (Mathf.Abs(diffRad) <= (Mathf.Deg2Rad * epsilonDeg)) {
+            // difference magnitude is within tolerance
+            ret = true;
+        }
+
+        return ret;
+    }
+
+    private void InitStartingDirection()
+    {
+        Vector3 eulerDeg = transform.rotation.eulerAngles;
+        
+        if (DiffAngleIsSame(eulerDeg.z, 0.0f, 2.0f)) {
+            m_Direction = CardinalDirection.South;
+        } else if (DiffAngleIsSame(eulerDeg.z, 90.0f, 2.0f)) {
+            m_Direction = CardinalDirection.West;
+        } else if (DiffAngleIsSame(eulerDeg.z, 180.0f, 2.0f)) {
+            m_Direction = CardinalDirection.North;
+        } else if (DiffAngleIsSame(eulerDeg.z, -90.0f, 2.0f)) { 
+            m_Direction = CardinalDirection.East;
+        } else {
+            Debug.Log("Warning, player: " + name + "'s direction is not Cardinal" + 
+                      ", forcing to point North");
+            m_Direction = CardinalDirection.North;
+        }
+
+        Debug.Log("euler: " + eulerDeg.z + " dir: " + m_Direction.ToString());
+        SetRotationFromCardinalDirection(m_Direction);
+    }
+
+    private void SetRotationFromCardinalDirection(CardinalDirection dir)
+    {
+        Vector3 eulerDeg = transform.rotation.eulerAngles;
+        
+        switch (dir) {
+            case CardinalDirection.North:
+                eulerDeg.z = 180.0f;
+                break;
+            case CardinalDirection.South:
+                eulerDeg.z = 0.0f;
+                break;
+            case CardinalDirection.East:
+                eulerDeg.z = -90.0f;
+                break;
+            case CardinalDirection.West:
+                eulerDeg.z = 90.0f;
+                break;
+        }
+        transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
+    }
+
     public void OnTurnLeft()
     {
-        Vector3 euler = transform.rotation.eulerAngles;
-        euler.z += 90f;
+        switch (m_Direction) {
+            case CardinalDirection.North:
+                m_Direction = CardinalDirection.East;
+                break;
+            case CardinalDirection.South:
+                m_Direction = CardinalDirection.West;
+                break;
+            case CardinalDirection.East:
+                m_Direction = CardinalDirection.South;
+                break;
+            case CardinalDirection.West:
+                m_Direction = CardinalDirection.North;
+                break;
+        }
 
-        RotatePlayer(euler);
-
+        SetRotationFromCardinalDirection(m_Direction);
+        
         // flag to create a new trail
         m_IsBeginTrail = true;
 
@@ -90,11 +181,23 @@ public class Player : MonoBehaviour
 
     public void OnTurnRight()
     {
-        Vector3 euler = transform.rotation.eulerAngles;
-        euler.z -= 90f;
+        switch (m_Direction) {
+            case CardinalDirection.North:
+                m_Direction = CardinalDirection.West;
+                break;
+            case CardinalDirection.South:
+                m_Direction = CardinalDirection.East;
+                break;
+            case CardinalDirection.East:
+                m_Direction = CardinalDirection.North;
+                break;
+            case CardinalDirection.West:
+                m_Direction = CardinalDirection.South;
+                break;
+        }
 
-        RotatePlayer(euler);
-
+        SetRotationFromCardinalDirection(m_Direction);
+        
         // flag to create a new trail
         m_IsBeginTrail = true;
 
@@ -206,11 +309,6 @@ public class Player : MonoBehaviour
             m_TrailCollider.points = collidePoints;
         }
     }
-
-    private void RotatePlayer(Vector3 eulerDeg)
-    {
-        transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
-    }
     
     private void HandleInput()
     {  
@@ -241,7 +339,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (m_IsPlaying) {
-
+            
             if (m_IsLiving) {
                 // handle input keys
                 HandleInput();
