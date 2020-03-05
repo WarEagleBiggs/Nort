@@ -40,16 +40,20 @@ public class Player : MonoBehaviour
     
     private List<GameObject> m_TrailObjectList;
     
-    private bool m_IsBeginTrail;
+    private bool m_IsJustTurned;
     public Animator m_Animator;
 
     public float m_TrailWidth = 0.01f;
     private PolygonCollider2D m_TrailCollider;
 
+    private PolygonCollider2D m_PreviousCollider;
+
     private Mesh m_TrailMesh;
     public Material m_TrailMaterial;
     public float m_TrailZ;
-
+    
+    public float m_MinGapBetweenTrails = 0.15f;
+    
     public bool m_IsPlaying;
 
     // --- accessor properties ---
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        m_IsBeginTrail = true;
+        m_IsJustTurned = true;
 
         // ensure starting direction is Cardinal
         InitStartingDirection();
@@ -79,7 +83,7 @@ public class Player : MonoBehaviour
         m_TrailCollider = null;
         m_TrailMesh = null;
         
-        m_IsBeginTrail = true;
+        m_IsJustTurned = true;
 
         m_IsLiving = true;
         
@@ -171,12 +175,10 @@ public class Player : MonoBehaviour
         SetRotationFromCardinalDirection(m_Direction);
         
         // flag to create a new trail
-        m_IsBeginTrail = true;
+        m_IsJustTurned = true;
 
-        if (m_TrailCollider != null) {
-            // rename trail collider 
-            m_TrailCollider.name = "Trail";
-        }
+        // mark trail as collidable
+        EnableTrailAsCollidable();
     }
 
     public void OnTurnRight()
@@ -199,17 +201,27 @@ public class Player : MonoBehaviour
         SetRotationFromCardinalDirection(m_Direction);
         
         // flag to create a new trail
-        m_IsBeginTrail = true;
+        m_IsJustTurned = true;
 
-        if (m_TrailCollider != null) {
-            // rename trail collider 
-            m_TrailCollider.name = "Trail";
-        }
+        // mark trail as collidable
+        EnableTrailAsCollidable();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void EnableTrailAsCollidable()
+    {
+        if (m_PreviousCollider != null) {
+            // rename trail collider to make it active
+            m_PreviousCollider.name = "Trail";
+        }
+        
+        m_PreviousCollider = m_TrailCollider;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
     {
         // --- detect collision ---
+        
+        Debug.Log("collide");
         
         if (!other.name.Contains(name)) {
             // not hitting self
@@ -309,7 +321,7 @@ public class Player : MonoBehaviour
             m_TrailCollider.points = collidePoints;
         }
     }
-    
+
     private void HandleInput()
     {  
         if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
@@ -318,7 +330,7 @@ public class Player : MonoBehaviour
 
             // turn player
             OnTurnLeft();
-
+            
         } else if (!Input.GetKey(m_LeftTurnKey)) {
             // clear flag
             m_IsLeftDown = false;
@@ -329,7 +341,7 @@ public class Player : MonoBehaviour
 
             // turn player
             OnTurnRight();
-
+            
         } else if (!Input.GetKey(m_RightTurnKey)) {
             // clear flag
             m_IsRightDown = false;
@@ -345,9 +357,8 @@ public class Player : MonoBehaviour
                 HandleInput();
             }
 
-            if (m_IsBeginTrail) {
+            if (m_IsJustTurned) {
                 // --- start a new trail in this frame ---
-                m_IsBeginTrail = false;
 
                 // back up a bit
                 transform.position += PlayerForwardDirection() * (m_TrailWidth);
@@ -357,7 +368,6 @@ public class Player : MonoBehaviour
 
                 // restore position
                 transform.position -= PlayerForwardDirection() * (m_TrailWidth);
-
             }
 
             // update trail vertices based on player position
@@ -367,8 +377,14 @@ public class Player : MonoBehaviour
                 // --- play is alive, update position ---
                 float speed = m_PlayerSpeedPerSec * Time.deltaTime;
                 transform.position += -PlayerForwardDirection() * speed;
-            }
-        }
 
+                if (m_IsJustTurned) {
+                    transform.position -= PlayerForwardDirection() * m_MinGapBetweenTrails;
+                }
+            }
+            
+            m_IsJustTurned = false;
+
+        }
     }
 }
