@@ -379,6 +379,7 @@ public class Player : MonoBehaviour
                 transform.position += -PlayerForwardDirection() * speed;
 
                 if (m_IsJustTurned) {
+                    // ensure gap between trails
                     transform.position -= PlayerForwardDirection() * m_MinGapBetweenTrails;
                 }
             }
