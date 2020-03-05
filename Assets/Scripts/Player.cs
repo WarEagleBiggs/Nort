@@ -79,9 +79,6 @@ public class Player : MonoBehaviour
             DestroyImmediate(obj);
         }
         
-        // ensure starting direction is Cardinal
-        InitStartingDirection();
-
         m_TrailObjectList.Clear();
         m_TrailCollider = null;
         m_TrailMesh = null;
@@ -92,6 +89,9 @@ public class Player : MonoBehaviour
         
         transform.position = m_InitialPosition;
         transform.rotation = m_InitialRotation;
+               
+        // ensure starting direction is Cardinal
+        InitStartingDirection();
     }
 
     public float DiffAngleRad(float xRad, float yRad)
