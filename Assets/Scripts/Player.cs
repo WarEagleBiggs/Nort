@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
             DestroyImmediate(obj);
         }
         
+        // ensure starting direction is Cardinal
+        InitStartingDirection();
+
         m_TrailObjectList.Clear();
         m_TrailCollider = null;
         m_TrailMesh = null;
@@ -115,22 +118,24 @@ public class Player : MonoBehaviour
     private void InitStartingDirection()
     {
         Vector3 eulerDeg = transform.rotation.eulerAngles;
+
+        const float nearlySameDeg = 2.0f;
         
-        if (DiffAngleIsSame(eulerDeg.z, 0.0f, 2.0f)) {
-            m_Direction = CardinalDirection.South;
-        } else if (DiffAngleIsSame(eulerDeg.z, 90.0f, 2.0f)) {
-            m_Direction = CardinalDirection.West;
-        } else if (DiffAngleIsSame(eulerDeg.z, 180.0f, 2.0f)) {
+        if (DiffAngleIsSame(eulerDeg.z, 180.0f, nearlySameDeg)) {
             m_Direction = CardinalDirection.North;
-        } else if (DiffAngleIsSame(eulerDeg.z, -90.0f, 2.0f)) { 
+        } else if (DiffAngleIsSame(eulerDeg.z, 90.0f, nearlySameDeg)) {
             m_Direction = CardinalDirection.East;
+        } else if (DiffAngleIsSame(eulerDeg.z, 0.0f, nearlySameDeg)) {
+            m_Direction = CardinalDirection.South;
+        } else if (DiffAngleIsSame(eulerDeg.z, -90.0f, nearlySameDeg)) { 
+            m_Direction = CardinalDirection.West;
         } else {
             Debug.Log("Warning, player: " + name + "'s direction is not Cardinal" + 
                       ", forcing to point North");
             m_Direction = CardinalDirection.North;
         }
 
-        Debug.Log("euler: " + eulerDeg.z + " dir: " + m_Direction.ToString());
+        // ensure Euler angles are set along Cardinal direction 
         SetRotationFromCardinalDirection(m_Direction);
     }
 
@@ -146,10 +151,10 @@ public class Player : MonoBehaviour
                 eulerDeg.z = 0.0f;
                 break;
             case CardinalDirection.East:
-                eulerDeg.z = -90.0f;
+                eulerDeg.z = 90.0f;
                 break;
             case CardinalDirection.West:
-                eulerDeg.z = 90.0f;
+                eulerDeg.z = -90.0f;
                 break;
         }
         transform.rotation = Quaternion.Euler(eulerDeg.x, eulerDeg.y, eulerDeg.z);
@@ -159,16 +164,16 @@ public class Player : MonoBehaviour
     {
         switch (m_Direction) {
             case CardinalDirection.North:
-                m_Direction = CardinalDirection.East;
-                break;
-            case CardinalDirection.South:
                 m_Direction = CardinalDirection.West;
                 break;
+            case CardinalDirection.South:
+                m_Direction = CardinalDirection.East;
+                break;
             case CardinalDirection.East:
-                m_Direction = CardinalDirection.South;
+                m_Direction = CardinalDirection.North;
                 break;
             case CardinalDirection.West:
-                m_Direction = CardinalDirection.North;
+                m_Direction = CardinalDirection.South;
                 break;
         }
 
@@ -185,16 +190,16 @@ public class Player : MonoBehaviour
     {
         switch (m_Direction) {
             case CardinalDirection.North:
-                m_Direction = CardinalDirection.West;
-                break;
-            case CardinalDirection.South:
                 m_Direction = CardinalDirection.East;
                 break;
+            case CardinalDirection.South:
+                m_Direction = CardinalDirection.West;
+                break;
             case CardinalDirection.East:
-                m_Direction = CardinalDirection.North;
+                m_Direction = CardinalDirection.South;
                 break;
             case CardinalDirection.West:
-                m_Direction = CardinalDirection.South;
+                m_Direction = CardinalDirection.North;
                 break;
         }
 
@@ -220,8 +225,6 @@ public class Player : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         // --- detect collision ---
-        
-        Debug.Log("collide");
         
         if (!other.name.Contains(name)) {
             // not hitting self
@@ -324,25 +327,25 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {  
-        if (!m_IsLeftDown && Input.GetKey(m_LeftTurnKey)) {
+        if (!m_IsLeftDown && Input.GetKeyDown(m_LeftTurnKey)) {
 
             m_IsLeftDown = true;
 
             // turn player
             OnTurnLeft();
             
-        } else if (!Input.GetKey(m_LeftTurnKey)) {
+        } else if (!Input.GetKeyDown(m_LeftTurnKey)) {
             // clear flag
             m_IsLeftDown = false;
         }
 
-        if (!m_IsRightDown && Input.GetKey(m_RightTurnKey)) {
+        if (!m_IsRightDown && Input.GetKeyDown(m_RightTurnKey)) {
             m_IsRightDown = true;
 
             // turn player
             OnTurnRight();
             
-        } else if (!Input.GetKey(m_RightTurnKey)) {
+        } else if (!Input.GetKeyDown(m_RightTurnKey)) {
             // clear flag
             m_IsRightDown = false;
         }
