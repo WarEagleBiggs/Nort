@@ -3372,6 +3372,7 @@ MonoBehaviour:
   m_TrailWidth: 0.1
   m_TrailMaterial: {fileID: 2100000, guid: d2076aeef96114b0c9479690a6f76492, type: 2}
   m_TrailZ: -2
+  m_MinGapBetweenTrails: 0.15
   m_IsPlaying: 0
 --- !u!50 &2086345528
 Rigidbody2D:
@@ -3476,6 +3477,7 @@ MonoBehaviour:
   m_TrailWidth: 0.1
   m_TrailMaterial: {fileID: 2100000, guid: f175246155d014adc806b7384b1cd62f, type: 2}
   m_TrailZ: -2
+  m_MinGapBetweenTrails: 0.15
   m_IsPlaying: 0
 --- !u!50 &2091419713
 Rigidbody2D:
