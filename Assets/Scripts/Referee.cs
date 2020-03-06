@@ -36,7 +36,7 @@ public class Referee : MonoBehaviour
 
     private float m_InitialTime;
     public const float c_CountDownSec = 1.0f;
-    public const float c_ReplayDelaySec = 1.0f;
+    public const float c_ReplayDelaySec = 2.0f;
     public const float c_ImageShowDurationSec = 2.0f;
 
 
