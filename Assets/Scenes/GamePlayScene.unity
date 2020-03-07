@@ -148,8 +148,8 @@ Transform:
   m_LocalPosition: {x: -0.08433239, y: 0.15068781, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 338822017}
   - {fileID: 759172024}
+  - {fileID: 338822017}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -367,7 +367,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 215788456}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &351415441
 GameObject:
@@ -787,7 +787,7 @@ Transform:
   - {fileID: 1084240394}
   - {fileID: 802962415}
   m_Father: {fileID: 215788456}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802962414
 GameObject:
@@ -1897,7 +1897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1329280884
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3328,6 +3328,7 @@ GameObject:
   - component: {fileID: 2086345527}
   - component: {fileID: 2086345528}
   - component: {fileID: 2086345529}
+  - component: {fileID: 2086345530}
   m_Layer: 0
   m_Name: BluePlayer
   m_TagString: Untagged
@@ -3421,6 +3422,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &2086345530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086345525}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b191d2e81ad7e44319c653584ffd6127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OpponentPlayer: {fileID: 2091419712}
 --- !u!1 &2091419710
 GameObject:
   m_ObjectHideFlags: 0
