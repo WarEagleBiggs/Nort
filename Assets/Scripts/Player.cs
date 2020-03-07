@@ -56,15 +56,21 @@ public class Player : MonoBehaviour
     
     public bool m_IsPlaying;
 
+    private AiPlayer m_AiPlayer;
+    
     // --- accessor properties ---
     public bool IsLiving => m_IsLiving;
 
+    public List<GameObject> trailObjects => m_TrailObjectList;
+    
     Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
     Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
 
     private void Start()
     {
         m_IsJustTurned = true;
+
+        m_AiPlayer = gameObject.GetComponent<AiPlayer>();
 
         // ensure starting direction is Cardinal
         InitStartingDirection();
@@ -75,11 +81,13 @@ public class Player : MonoBehaviour
 
     public void Restart()
     {
-        foreach (var obj in m_TrailObjectList) {
-            DestroyImmediate(obj);
+        if (m_TrailObjectList != null) {
+            foreach (var obj in m_TrailObjectList) {
+                DestroyImmediate(obj);
+            }
+            m_TrailObjectList.Clear();
         }
-        
-        m_TrailObjectList.Clear();
+
         m_TrailCollider = null;
         m_TrailMesh = null;
         
@@ -353,7 +361,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (m_IsPlaying) {
+
+        bool isAiPlayer = m_AiPlayer != null && m_AiPlayer.isActiveAndEnabled;
+        
+        if (m_IsPlaying && !isAiPlayer) {
             
             if (m_IsLiving) {
                 // handle input keys
