@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
         m_PreviousCollider = m_TrailCollider;
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void EvaluateCollisionWith(Collider2D other)
     {
         // --- detect collision ---
         
@@ -243,6 +243,16 @@ public class Player : MonoBehaviour
                 m_Animator.SetTrigger("BackToBase");
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        EvaluateCollisionWith(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        EvaluateCollisionWith(other);
     }
 
     private void AddTrail()
