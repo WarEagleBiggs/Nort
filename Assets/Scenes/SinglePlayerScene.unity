@@ -1897,7 +1897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1329280884
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3115,7 +3115,7 @@ MonoBehaviour:
   m_TrailWidth: 0.11
   m_TrailMaterial: {fileID: 2100000, guid: d2076aeef96114b0c9479690a6f76492, type: 2}
   m_TrailZ: -2
-  m_MinGapBetweenTrails: 0.15
+  m_MinGapBetweenTrails: 0.25
   m_IsPlaying: 0
   m_IsDisbleCollision: 1
 --- !u!50 &2086345528
@@ -3234,7 +3234,7 @@ MonoBehaviour:
   m_TrailWidth: 0.11
   m_TrailMaterial: {fileID: 2100000, guid: f175246155d014adc806b7384b1cd62f, type: 2}
   m_TrailZ: -2
-  m_MinGapBetweenTrails: 0.15
+  m_MinGapBetweenTrails: 0.25
   m_IsPlaying: 0
   m_IsDisbleCollision: 0
 --- !u!50 &2091419713
