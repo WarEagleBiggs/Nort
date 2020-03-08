@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     public float m_TrailWidth = 0.01f;
     private PolygonCollider2D m_TrailCollider;
 
-    private PolygonCollider2D m_PreviousCollider;
+    private List<Tuple<Vector3, PolygonCollider2D>> m_TrailsToEnable;
 
     private Mesh m_TrailMesh;
     public Material m_TrailMaterial;
@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
         m_IsStartTrail = true;
 
         m_AiPlayer = gameObject.GetComponent<AiPlayer>();
+        
+        m_TrailsToEnable = new List<Tuple<Vector3, PolygonCollider2D>>();
 
         // ensure starting direction is Cardinal
         InitStartingDirection();
@@ -88,6 +90,8 @@ public class Player : MonoBehaviour
             }
             m_TrailObjectList.Clear();
         }
+
+        m_TrailsToEnable = new List<Tuple<Vector3, PolygonCollider2D>>();
 
         m_TrailCollider = null;
         m_TrailMesh = null;
@@ -229,14 +233,33 @@ public class Player : MonoBehaviour
         EnableTrailAsCollidable();
     }
 
+    private void EnableOldTrails()
+    {
+        if (m_TrailsToEnable.Count > 0) {
+
+            List<Tuple<Vector3, PolygonCollider2D>> toRemoveList =
+                new List<Tuple<Vector3, PolygonCollider2D>>();
+
+            foreach (var trail in m_TrailsToEnable) {
+                Vector3 pos = trail.Item1;
+
+                if ((transform.localPosition - pos).magnitude > 0.5f) {
+                    PolygonCollider2D poly = trail.Item2;
+                    poly.name = "Trail";
+                    toRemoveList.Add(trail);
+                }
+            }
+
+            foreach (var trail in toRemoveList) {
+                m_TrailsToEnable.Remove(trail);
+            }
+        }
+    }
+
     private void EnableTrailAsCollidable()
     {
-        if (m_PreviousCollider != null) {
-            // rename trail collider to make it active
-            m_PreviousCollider.name = "Trail";
-        }
-        
-        m_PreviousCollider = m_TrailCollider;
+        m_TrailsToEnable.Add(
+            new Tuple<Vector3, PolygonCollider2D>(transform.localPosition, m_TrailCollider));
     }
 
     private void EvaluateCollisionWith(Collider2D other)
@@ -284,7 +307,7 @@ public class Player : MonoBehaviour
 
         MeshRenderer renderer = trail.AddComponent<MeshRenderer>();
         renderer.material = m_TrailMaterial;
-    
+
         // 4 vertices for two triangles
         Vector3[] triVerts = new Vector3[4];
         // two triangles with 3 vertices each
@@ -329,7 +352,6 @@ public class Player : MonoBehaviour
             Vector3 center = transform.position;
             center.z = m_TrailZ;
 
-
             triVerts[2] = center - PlayerRightDirection() * m_TrailWidth;
             triVerts[3] = center + PlayerRightDirection() * m_TrailWidth;
 
@@ -359,25 +381,25 @@ public class Player : MonoBehaviour
     }
 
     private void HandleInput()
-    {  
+    {
         if (!m_IsLeftDown && Input.GetKeyDown(m_LeftTurnKey)) {
 
             m_IsLeftDown = true;
 
             // turn player
             OnTurnLeft();
-            
+
         } else if (!Input.GetKeyDown(m_LeftTurnKey)) {
             // clear flag
             m_IsLeftDown = false;
         }
-
+        
         if (!m_IsRightDown && Input.GetKeyDown(m_RightTurnKey)) {
             m_IsRightDown = true;
 
             // turn player
             OnTurnRight();
-            
+
         } else if (!Input.GetKeyDown(m_RightTurnKey)) {
             // clear flag
             m_IsRightDown = false;
@@ -423,6 +445,8 @@ public class Player : MonoBehaviour
             }
             
             m_IsStartTrail = false;
+
+            EnableOldTrails();
 
         }
     }
