@@ -170,6 +170,10 @@ public class Referee : MonoBehaviour
                     // show replay button
                     m_ReplayButton.SetActive(true);
                 }
+                if (m_ExitMenuButton != null) {
+                    // show exit button
+                    m_ExitMenuButton.SetActive(true);
+                }
 
                 break;
 

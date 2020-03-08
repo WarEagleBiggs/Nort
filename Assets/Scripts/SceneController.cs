@@ -9,14 +9,19 @@ public class SceneController : MonoBehaviour
 {
     public GameObject m_AboutPage;
     
-    public void PlayGame()
+    public void Start2PlayerGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    
+    public void Start1PlayerGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 
     public void GotoMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(0);
     }
 
     public void OnAboutButton()
