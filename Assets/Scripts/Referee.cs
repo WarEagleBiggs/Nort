@@ -43,8 +43,16 @@ public class Referee : MonoBehaviour
     private void HideRestartButton()
     {
         if (m_ReplayButton != null) {
-            // initially ensure replay button is not active 
+            // hide replay button is not active 
             m_ReplayButton.SetActive(false);
+        }
+    }
+
+    private void HideExitMenuButton()
+    {
+        if (m_ExitMenuButton != null) {
+            // hide exit to menu is not active 
+            m_ExitMenuButton.SetActive(false);
         }
     }
 
@@ -263,6 +271,7 @@ public class Referee : MonoBehaviour
         m_InitialTime = Time.time;
         
         HideRestartButton();
+        HideExitMenuButton();
 
         m_PlayerA.Restart();
         m_PlayerB.Restart();
