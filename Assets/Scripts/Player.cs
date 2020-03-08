@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
     public KeyCode m_RightTurnKey;
     private bool m_IsRightDown = false;
 
-    readonly Vector3 m_ForwardVec = new Vector3(0f, 1f, 0f);
-    readonly Vector3 m_RightVec = new Vector3(1f, 0f, 0f);
+    public static readonly Vector3 s_ForwardVec = new Vector3(0f, 1f, 0f);
+    public static readonly Vector3 s_RightVec = new Vector3(1f, 0f, 0f);
 
     // current player direction
     private CardinalDirection m_Direction = CardinalDirection.North;
@@ -64,8 +64,8 @@ public class Player : MonoBehaviour
     public List<GameObject> trailObjects => m_TrailObjectList;
 
     public CardinalDirection direction => m_Direction;
-    private Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
-    private Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
+    private Vector3 PlayerForwardDirection() { return transform.rotation * s_ForwardVec; }
+    private Vector3 PlayerRightDirection() { return transform.rotation * s_RightVec; }
 
     private void Start()
     {
