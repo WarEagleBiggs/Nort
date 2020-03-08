@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private enum CardinalDirection
+    public enum CardinalDirection
     {
         North = 0,
         South,
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     
     private List<GameObject> m_TrailObjectList;
     
-    private bool m_IsJustTurned;
+    private bool m_IsStartTrail;
     public Animator m_Animator;
 
     public float m_TrailWidth = 0.01f;
@@ -62,13 +62,14 @@ public class Player : MonoBehaviour
     public bool IsLiving => m_IsLiving;
 
     public List<GameObject> trailObjects => m_TrailObjectList;
-    
-    Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
-    Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
+
+    public CardinalDirection direction => m_Direction;
+    private Vector3 PlayerForwardDirection() { return transform.rotation * m_ForwardVec; }
+    private Vector3 PlayerRightDirection() { return transform.rotation * m_RightVec; }
 
     private void Start()
     {
-        m_IsJustTurned = true;
+        m_IsStartTrail = true;
 
         m_AiPlayer = gameObject.GetComponent<AiPlayer>();
 
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
         m_TrailCollider = null;
         m_TrailMesh = null;
         
-        m_IsJustTurned = true;
+        m_IsStartTrail = true;
 
         m_IsLiving = true;
         
@@ -102,20 +103,20 @@ public class Player : MonoBehaviour
         InitStartingDirection();
     }
 
-    public float DiffAngleRad(float xRad, float yRad)
+    public static float DiffAngleDeg(float xDeg, float yDeg)
     {
-        return Mathf.Atan2(
-            Mathf.Sin(xRad - yRad), 
-            Mathf.Cos(xRad - yRad));
+        return Mathf.Rad2Deg * Mathf.Atan2(
+            Mathf.Sin(Mathf.Deg2Rad * (xDeg - yDeg)), 
+            Mathf.Cos(Mathf.Deg2Rad * (xDeg - yDeg)));
     }
 
-    private bool DiffAngleIsSame(float xDeg, float yDeg, float epsilonDeg = 1.0f)
+    public static bool DiffAngleIsSame(float xDeg, float yDeg, float epsilonDeg = 1.0f)
     {
         bool ret = false;
         
-        float diffRad = DiffAngleRad(Mathf.Deg2Rad * xDeg, Mathf.Deg2Rad * yDeg);
+        float diffDeg = DiffAngleDeg(xDeg, yDeg);
         
-        if (Mathf.Abs(diffRad) <= (Mathf.Deg2Rad * epsilonDeg)) {
+        if (Mathf.Abs(diffDeg) <= epsilonDeg) {
             // difference magnitude is within tolerance
             ret = true;
         }
@@ -123,31 +124,39 @@ public class Player : MonoBehaviour
         return ret;
     }
 
+    public static CardinalDirection NearestCardinalDirectionFromYaw(float yawDeg)
+    {
+        CardinalDirection dir;
+        
+        const float thresholdDeg = 45.0f;
+        
+        if (DiffAngleIsSame(yawDeg, 180.0f, thresholdDeg)) {
+            dir = CardinalDirection.North;
+        } else if (DiffAngleIsSame(yawDeg, 90.0f, thresholdDeg)) {
+            dir = CardinalDirection.East;
+        } else if (DiffAngleIsSame(yawDeg, 0.0f, thresholdDeg)) {
+            dir = CardinalDirection.South;
+        } else if (DiffAngleIsSame(yawDeg, -90.0f, thresholdDeg)) { 
+            dir = CardinalDirection.West;
+        } else {
+            Debug.Log("Warning: ambiguous cardinal direction: " + yawDeg);
+            dir = CardinalDirection.North;
+        }
+
+        return dir;
+    }
+
     private void InitStartingDirection()
     {
         Vector3 eulerDeg = transform.rotation.eulerAngles;
 
-        const float nearlySameDeg = 2.0f;
-        
-        if (DiffAngleIsSame(eulerDeg.z, 180.0f, nearlySameDeg)) {
-            m_Direction = CardinalDirection.North;
-        } else if (DiffAngleIsSame(eulerDeg.z, 90.0f, nearlySameDeg)) {
-            m_Direction = CardinalDirection.East;
-        } else if (DiffAngleIsSame(eulerDeg.z, 0.0f, nearlySameDeg)) {
-            m_Direction = CardinalDirection.South;
-        } else if (DiffAngleIsSame(eulerDeg.z, -90.0f, nearlySameDeg)) { 
-            m_Direction = CardinalDirection.West;
-        } else {
-            Debug.Log("Warning, player: " + name + "'s direction is not Cardinal" + 
-                      ", forcing to point North");
-            m_Direction = CardinalDirection.North;
-        }
+        m_Direction = NearestCardinalDirectionFromYaw(eulerDeg.z);
 
         // ensure Euler angles are set along Cardinal direction 
         SetRotationFromCardinalDirection(m_Direction);
     }
 
-    private void SetRotationFromCardinalDirection(CardinalDirection dir)
+    public void SetRotationFromCardinalDirection(CardinalDirection dir)
     {
         Vector3 eulerDeg = transform.rotation.eulerAngles;
         
@@ -188,7 +197,7 @@ public class Player : MonoBehaviour
         SetRotationFromCardinalDirection(m_Direction);
         
         // flag to create a new trail
-        m_IsJustTurned = true;
+        m_IsStartTrail = true;
 
         // mark trail as collidable
         EnableTrailAsCollidable();
@@ -214,7 +223,7 @@ public class Player : MonoBehaviour
         SetRotationFromCardinalDirection(m_Direction);
         
         // flag to create a new trail
-        m_IsJustTurned = true;
+        m_IsStartTrail = true;
 
         // mark trail as collidable
         EnableTrailAsCollidable();
@@ -233,18 +242,24 @@ public class Player : MonoBehaviour
     private void EvaluateCollisionWith(Collider2D other)
     {
         // --- detect collision ---
-        
-        if (!other.name.Contains(name)) {
-            // not hitting self
-            
-            m_IsLiving = false;
-            if (m_Animator != null) {
-                m_Animator.SetTrigger("ImpactTrigger");
-                m_Animator.SetTrigger("BackToBase");
+
+        if (!m_IsDisbleCollision) {
+
+            if (!other.name.Contains(name)) {
+                // not hitting self
+
+                m_IsLiving = false;
+                if (m_Animator != null) {
+                    m_Animator.SetTrigger("ImpactTrigger");
+                    m_Animator.SetTrigger("BackToBase");
+                }
             }
         }
     }
 
+    // TODO remove this soon!!! (testing only)
+    public bool m_IsDisbleCollision = false;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         EvaluateCollisionWith(other);
@@ -371,17 +386,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         bool isAiPlayer = m_AiPlayer != null && m_AiPlayer.isActiveAndEnabled;
         
-        if (m_IsPlaying && !isAiPlayer) {
+        if (m_IsPlaying) {
             
-            if (m_IsLiving) {
+            if (m_IsLiving && !isAiPlayer) {
                 // handle input keys
                 HandleInput();
             }
 
-            if (m_IsJustTurned) {
+            if (m_IsStartTrail) {
                 // --- start a new trail in this frame ---
 
                 // back up a bit
@@ -402,13 +416,13 @@ public class Player : MonoBehaviour
                 float speed = m_PlayerSpeedPerSec * Time.deltaTime;
                 transform.position += -PlayerForwardDirection() * speed;
 
-                if (m_IsJustTurned) {
+                if (m_IsStartTrail) {
                     // ensure gap between trails
                     transform.position -= PlayerForwardDirection() * m_MinGapBetweenTrails;
                 }
             }
             
-            m_IsJustTurned = false;
+            m_IsStartTrail = false;
 
         }
     }
