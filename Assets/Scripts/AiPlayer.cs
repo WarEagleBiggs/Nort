@@ -117,6 +117,7 @@ public class AiPlayer : MonoBehaviour
                 if (hit.collider != null && hit.collider.name != m_PlayerToControl.name) {
                     m_DebugHitList.Add(hit.point);
                     m_RayResponseRangeMap[entry.Key] = hit.distance;
+                    // found first intersection, quit looking  
                     break;
                 } else {
                     m_RayResponseRangeMap[entry.Key] = Single.PositiveInfinity;
