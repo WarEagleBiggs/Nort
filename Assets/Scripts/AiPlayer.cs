@@ -11,7 +11,10 @@ public class AiPlayer : MonoBehaviour
     private Player m_PlayerToControl;
 
     private float m_LastTurnTime = 0.0f;
-    
+
+    private RaycastHit2D[] m_AiRayHitList;
+
+
     private enum AiState
     {
         MoveTowards = 0,
@@ -109,11 +112,18 @@ public class AiPlayer : MonoBehaviour
         foreach (var entry in m_RayDirectionMap) {
             Vector3 localDirV = entry.Value;
             Vector3 worldDir = transform.TransformDirection(localDirV);
-            
-            RaycastHit2D[] hitList = Physics2D.RaycastAll(
-                pos,worldDir, 100.0f);
 
-            foreach (var hit in hitList) {
+            if (m_AiRayHitList == null) {
+                m_AiRayHitList = new RaycastHit2D[5];
+            }
+
+            int numHits = Physics2D.RaycastNonAlloc(
+                pos,worldDir, m_AiRayHitList, 100.0f);
+
+            for (int i = 0; i < numHits; ++i) {
+
+                RaycastHit2D hit = m_AiRayHitList[i];
+                
                 if (hit.collider != null && hit.collider.name != m_PlayerToControl.name) {
                     m_DebugHitList.Add(hit.point);
                     m_RayResponseRangeMap[entry.Key] = hit.distance;
