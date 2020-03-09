@@ -33,26 +33,6 @@ public class AiPlayer : MonoBehaviour
     {
         m_PlayerToControl = GetComponent<Player>();
     }
-//
-//    private Bounds ComputeObjectBounds(GameObject obj)
-//    {
-//        Bounds bb = new Bounds();
-//        
-//        bb.size = Vector3.negativeInfinity;
-//        bb.center = Vector3.negativeInfinity;
-//            
-//        Transform[] allChildren = GetComponentsInChildren<Transform>();
-//        foreach (Transform t in allChildren) {
-//            BoxCollider2D c = t.GetComponent<BoxCollider2D>();
-//            if (c != null) {
-//                Bounds b = c.bounds;
-//                bb.Encapsulate(b.min);
-//                bb.Encapsulate(b.max);
-//            }
-//        }
-//
-//        return bb;
-//    }
 
     private void UpdateAiState()
     {
@@ -66,17 +46,8 @@ public class AiPlayer : MonoBehaviour
 
                 if (m_RayResponseRangeMap != null) {
                     if (m_RayResponseRangeMap["forward"] < m_AiMinForwardDistance) {
-                        
+                        // change state to move toward largest opening
                         m_AiState = AiState.MoveToOpening;
-                        
-//                        if (m_RayResponseRangeMap["right"] > m_RayResponseRangeMap["left"]) {
-//                            m_PlayerToControl.OnTurnRight();
-//                        } else {
-//                            m_PlayerToControl.OnTurnLeft();
-//                        }
-
-                       
-                        
                     } else {
 
                         // --- continuously point toward opponent ---
