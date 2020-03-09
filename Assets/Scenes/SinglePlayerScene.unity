@@ -3178,6 +3178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OpponentPlayer: {fileID: 2091419712}
+  m_AiResponseDelaySec: 0.7
 --- !u!1 &2091419710
 GameObject:
   m_ObjectHideFlags: 0
