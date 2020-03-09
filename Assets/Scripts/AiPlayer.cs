@@ -6,14 +6,12 @@ using UnityEngine;
 public class AiPlayer : MonoBehaviour
 {
     public Player m_OpponentPlayer;
-    protected Player m_PlayerToControl;
-
-    //private Bounds m_Bb = new Bounds();
+    public float m_AiResponseDelaySec = 0.7f;
+    
+    private Player m_PlayerToControl;
 
     private float m_LastTurnTime = 0.0f;
-
-    private Bounds m_SelfBounds;
-
+    
     private enum AiState
     {
         MoveTowards = 0,
@@ -23,54 +21,37 @@ public class AiPlayer : MonoBehaviour
 
     private AiState m_AiState = AiState.MoveTowards;
     
+    private Dictionary<string, Vector3> m_RayDirectionMap;
+    
+    private Dictionary<string, float> m_RayResponseRangeMap;
+    
+    private List<Vector3> m_DebugHitList;
+
     private void Start()
     {
         m_PlayerToControl = GetComponent<Player>();
-        m_SelfBounds = ComputeObjectBounds(m_PlayerToControl.gameObject);
     }
-
-    private Bounds ComputeObjectBounds(GameObject obj)
-    {
-        Bounds bb = new Bounds();
-        
-        bb.size = Vector3.negativeInfinity;
-        bb.center = Vector3.negativeInfinity;
-            
-        Transform[] allChildren = GetComponentsInChildren<Transform>();
-        foreach (Transform t in allChildren) {
-            BoxCollider2D c = t.GetComponent<BoxCollider2D>();
-            if (c != null) {
-                Bounds b = c.bounds;
-                bb.Encapsulate(b.min);
-                bb.Encapsulate(b.max);
-            }
-        }
-
-        return bb;
-    }
-    
 //
-//    private void ComputeOpponentRectangle()
+//    private Bounds ComputeObjectBounds(GameObject obj)
 //    {
-//        // --- figure opponent's extents box ---
+//        Bounds bb = new Bounds();
 //        
-//        if (m_OpponentPlayer.trailObjects != null) {
-//
-//            m_Bb.size = Vector3.negativeInfinity;
-//            m_Bb.center = Vector3.negativeInfinity;
+//        bb.size = Vector3.negativeInfinity;
+//        bb.center = Vector3.negativeInfinity;
 //            
-//            foreach (GameObject trailObj in m_OpponentPlayer.trailObjects) {
-//                Collider2D c = trailObj.GetComponent<Collider2D>();
-//                if (c != null) {
-//                    Bounds b = c.bounds;
-//                    m_Bb.Encapsulate(b.min);
-//                    m_Bb.Encapsulate(b.max);
-//                }
+//        Transform[] allChildren = GetComponentsInChildren<Transform>();
+//        foreach (Transform t in allChildren) {
+//            BoxCollider2D c = t.GetComponent<BoxCollider2D>();
+//            if (c != null) {
+//                Bounds b = c.bounds;
+//                bb.Encapsulate(b.min);
+//                bb.Encapsulate(b.max);
 //            }
 //        }
+//
+//        return bb;
 //    }
-
-
+    
     private void UpdateAiState()
     {
         switch (m_AiState) {
@@ -86,7 +67,7 @@ public class AiPlayer : MonoBehaviour
 
                 if (destinationDir != m_PlayerToControl.direction) {
 
-                    if (Time.realtimeSinceStartup - m_LastTurnTime > 0.7f) {
+                    if (Time.realtimeSinceStartup - m_LastTurnTime > m_AiResponseDelaySec) {
                         m_LastTurnTime = Time.realtimeSinceStartup;
 
                         float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
@@ -106,57 +87,56 @@ public class AiPlayer : MonoBehaviour
                 break;
         }
     }
-
-    private List<Vector3> m_RayDirectionList;
-
-    private List<Vector3> m_DebugHitList;
-    
     
     private void FireRays()
     {
-        if (m_RayDirectionList == null) {
-            m_RayDirectionList = new List<Vector3>();
-            m_RayDirectionList.Add(-Player.s_ForwardVec);
-            m_RayDirectionList.Add(Player.s_RightVec);
-            m_RayDirectionList.Add(-Player.s_RightVec);
+        if (m_RayDirectionMap == null) {
+            m_RayDirectionMap = new Dictionary<string, Vector3>();
+            m_RayDirectionMap["forward"] = -Player.s_ForwardVec;
+            m_RayDirectionMap["right"] = Player.s_RightVec;
+            m_RayDirectionMap["left"] = -Player.s_RightVec;
+
+            m_RayResponseRangeMap = new Dictionary<string, float>();
+            m_RayResponseRangeMap["forward"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["right"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["left"] = Single.PositiveInfinity;
         }
 
         m_DebugHitList = new List<Vector3>();
         
         Vector3 pos = transform.localPosition;
-        float ownRadius = m_SelfBounds.size.magnitude / 2.0f;
         
-        foreach (Vector3 dirV in m_RayDirectionList) {
-            Vector3 worldDir = transform.TransformDirection(dirV);
+        foreach (var entry in m_RayDirectionMap) {
+            Vector3 localDirV = entry.Value;
+            Vector3 worldDir = transform.TransformDirection(localDirV);
             
-            RaycastHit2D hit = Physics2D.Raycast(
-                pos + (worldDir * ownRadius),
-                worldDir, 100.0f);
-            if (hit.collider != null) {
-                m_DebugHitList.Add(hit.point);
+            RaycastHit2D[] hitList = Physics2D.RaycastAll(
+                pos,worldDir, 100.0f);
+
+            foreach (var hit in hitList) {
+                if (hit.collider != null && hit.collider.name != m_PlayerToControl.name) {
+                    m_DebugHitList.Add(hit.point);
+                    m_RayResponseRangeMap[entry.Key] = hit.distance;
+                    break;
+                } else {
+                    m_RayResponseRangeMap[entry.Key] = Single.PositiveInfinity;
+                }
             }
         }
     }
 
     void Update()
     {
-//        // compute opponent's full extents
-//        ComputeOpponentRectangle();
-
         // fire rays into the scene
         FireRays();
 
-        // update AI statee
+        // update AI state
         UpdateAiState();
     }
     
     void OnDrawGizmos()
     {
         // --- debug drawing ---
-        
-//        Gizmos.color = Color.white;
-//        float radius = m_Bb.extents.magnitude;
-//        Gizmos.DrawWireCube(m_Bb.center, m_Bb.size);
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(transform.localPosition, m_OpponentPlayer.transform.localPosition);
