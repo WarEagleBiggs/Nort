@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class AiPlayer : MonoBehaviour
@@ -34,50 +35,56 @@ public class AiPlayer : MonoBehaviour
         m_PlayerToControl = GetComponent<Player>();
     }
 
+    private float FindMinForwardDistance()
+    {
+        return Mathf.Min(m_RayResponseRangeMap["forwardRight"],
+            Mathf.Min(m_RayResponseRangeMap["forward"], 
+                m_RayResponseRangeMap["forwardLeft"]));
+    }
+    
     private void UpdateAiState()
     {
-        switch (m_AiState) {
-            case AiState.MoveTowards:
-                
+        if (m_PlayerToControl.IsLiving && m_RayResponseRangeMap != null) {
+            if (m_AiState == AiState.MoveTowards) {
                 /*  
                     if range is small in forward direction, do a turn!
                         which range is great, left or right and turn in that direction                        
                 */
 
-                if (m_RayResponseRangeMap != null) {
-                    if (m_RayResponseRangeMap["forward"] < m_AiMinForwardDistance) {
-                        // change state to move toward largest opening
-                        m_AiState = AiState.MoveToOpening;
-                    } else {
+                if (FindMinForwardDistance() < m_AiMinForwardDistance) {
+                    // change state to move toward largest opening
+                    m_AiState = AiState.MoveToOpening;
+                } else {
 
-                        // --- continuously point toward opponent ---
+                    // --- continuously point toward opponent ---
 
-                        Vector3 dirV = (m_OpponentPlayer.transform.localPosition -
-                                        transform.localPosition)
-                            .normalized;
-                        float yawDestDeg = Mathf.Rad2Deg * Mathf.Atan2(dirV.y, dirV.x) + 90.0f;
+                    Vector3 dirV = (m_OpponentPlayer.transform.localPosition -
+                                    transform.localPosition)
+                        .normalized;
+                    float yawDestDeg = Mathf.Rad2Deg * Mathf.Atan2(dirV.y, dirV.x) + 90.0f;
 
-                        Player.CardinalDirection destinationDir =
-                            Player.NearestCardinalDirectionFromYaw(yawDestDeg);
+                    Player.CardinalDirection destinationDir =
+                        Player.NearestCardinalDirectionFromYaw(yawDestDeg);
 
-                        if (destinationDir != m_PlayerToControl.direction) {
-                            if (Time.realtimeSinceStartup - m_LastTurnTime > m_AiResponseDelaySec) {
-                                m_LastTurnTime = Time.realtimeSinceStartup;
-                                float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
-                                float diffDeg = Player.DiffAngleDeg(playerYawDeg, yawDestDeg);
-                                if (diffDeg > 0.0) {
-                                    m_PlayerToControl.OnTurnRight();
-                                } else {
-                                    m_PlayerToControl.OnTurnLeft();
-                                }
+                    if (destinationDir != m_PlayerToControl.direction) {
+                        if (Time.realtimeSinceStartup - m_LastTurnTime > m_AiResponseDelaySec) {
+                            m_LastTurnTime = Time.realtimeSinceStartup;
+                            float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
+                            float diffDeg = Player.DiffAngleDeg(playerYawDeg, yawDestDeg);
+                            if (diffDeg > 0.0) {
+                                m_PlayerToControl.OnTurnRight();
+                            } else {
+                                m_PlayerToControl.OnTurnLeft();
                             }
                         }
                     }
                 }
-                break;
-            case AiState.MoveToOpening:
+
+            }
+
+            if (m_AiState == AiState.MoveToOpening) {
                 if (m_RayResponseRangeMap != null) {
-                    if (m_RayResponseRangeMap["forward"] < 1.0f) {
+                    if (FindMinForwardDistance() < m_AiMinForwardDistance) {
                         if (m_RayResponseRangeMap["right"] > m_RayResponseRangeMap["left"]) {
                             m_PlayerToControl.OnTurnRight();
                         } else {
@@ -85,11 +92,17 @@ public class AiPlayer : MonoBehaviour
                         }
                     }
                 }
-
-                break;
+            }
         }
     }
     
+    Vector3 VectorFromAngle(float angleDeg)
+    {
+        float angleRad = Mathf.Deg2Rad * angleDeg;
+
+        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0.0f).normalized;
+    }
+
     private void FireRays()
     {
         if (m_RayDirectionMap == null) {
@@ -97,11 +110,15 @@ public class AiPlayer : MonoBehaviour
             m_RayDirectionMap["forward"] = -Player.s_ForwardVec;
             m_RayDirectionMap["left"] = Player.s_RightVec;
             m_RayDirectionMap["right"] = -Player.s_RightVec;
+            m_RayDirectionMap["forwardLeft"] = VectorFromAngle(-75.0f);
+            m_RayDirectionMap["forwardRight"] = VectorFromAngle(-105.0f);
 
             m_RayResponseRangeMap = new Dictionary<string, float>();
             m_RayResponseRangeMap["forward"] = Single.PositiveInfinity;
             m_RayResponseRangeMap["right"] = Single.PositiveInfinity;
             m_RayResponseRangeMap["left"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["forwardLeft"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["forwardRight"] = Single.PositiveInfinity;
         }
 
         m_DebugHitList = new List<Vector3>();
@@ -144,20 +161,20 @@ public class AiPlayer : MonoBehaviour
         UpdateAiState();
     }
     
-//    void OnDrawGizmos()
-//    {
-//        // --- debug drawing ---
-//
-//        Gizmos.color = Color.magenta;
-//        Gizmos.DrawLine(transform.localPosition, m_OpponentPlayer.transform.localPosition);
-//        
-//        if (m_DebugHitList != null) {
-//            Gizmos.color = Color.yellow;
-//            foreach (Vector3 point in m_DebugHitList) {
-//                Gizmos.DrawLine(transform.localPosition, point);
-//            }
-//
-//            m_DebugHitList.Clear();
-//        }
-//    }
+    void OnDrawGizmos()
+    {
+        // --- debug drawing ---
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(transform.localPosition, m_OpponentPlayer.transform.localPosition);
+        
+        if (m_DebugHitList != null) {
+            Gizmos.color = Color.yellow;
+            foreach (Vector3 point in m_DebugHitList) {
+                Gizmos.DrawLine(transform.localPosition, point);
+            }
+
+            m_DebugHitList.Clear();
+        }
+    }
 }
