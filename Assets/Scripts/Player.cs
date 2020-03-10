@@ -266,23 +266,17 @@ public class Player : MonoBehaviour
     {
         // --- detect collision ---
 
-        if (!m_IsDisbleCollision) {
+        if (!other.name.Contains(name)) {
+            // not hitting self
 
-            if (!other.name.Contains(name)) {
-                // not hitting self
-
-                m_IsLiving = false;
-                if (m_Animator != null) {
-                    m_Animator.SetTrigger("ImpactTrigger");
-                    m_Animator.SetTrigger("BackToBase");
-                }
+            m_IsLiving = false;
+            if (m_Animator != null) {
+                m_Animator.SetTrigger("ImpactTrigger");
+                m_Animator.SetTrigger("BackToBase");
             }
         }
     }
 
-    // TODO remove this soon!!! (testing only)
-    public bool m_IsDisbleCollision = false;
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         EvaluateCollisionWith(other);
