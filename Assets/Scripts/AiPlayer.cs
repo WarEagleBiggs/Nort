@@ -131,8 +131,6 @@ public class AiPlayer : MonoBehaviour
         }
     }
 
-    private AiState m_PrevState = AiState.MoveTowards;
-    
     private void UpdateAiState()
     {
         if (m_RayResponseRangeMap != null) {
@@ -173,9 +171,9 @@ public class AiPlayer : MonoBehaviour
                 CoordFrame.LocalFrame, -Player.s_RightVec, new Vector3(-0.3f, 0.2f, 0.0f));
             
             m_RayDirectionMap["frontLeft"] = new Tuple<CoordFrame, Vector3, Vector3>(
-                CoordFrame.LocalFrame, Player.s_RightVec, new Vector3(0.3f, -0.25f, 0.0f));
+                CoordFrame.LocalFrame, Player.s_RightVec, new Vector3(0.3f, -0.3f, 0.0f));
             m_RayDirectionMap["frontRight"] = new Tuple<CoordFrame, Vector3, Vector3>(
-                CoordFrame.LocalFrame, -Player.s_RightVec, new Vector3(-0.3f, -0.25f, 0.0f));
+                CoordFrame.LocalFrame, -Player.s_RightVec, new Vector3(-0.3f, -0.3f, 0.0f));
             
             m_RayDirectionMap["forwardLeft"] = new Tuple<CoordFrame, Vector3, Vector3>(
                 CoordFrame.LocalFrame, VectorFromAngle(-70.0f), Vector3.zero);
@@ -247,12 +245,6 @@ public class AiPlayer : MonoBehaviour
 
     void Update()
     {
-//        if (m_PrevState != m_AiState) {
-//            m_PrevState = m_AiState;
-//
-//            Debug.Log(m_AiState);
-//        }
-
         if (m_RayDirectionMap != null) {
             // direction vector to opponent
             Vector3 towardV = (m_OpponentPlayer.transform.localPosition -
