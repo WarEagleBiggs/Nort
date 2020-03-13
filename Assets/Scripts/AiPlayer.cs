@@ -71,14 +71,24 @@ public class AiPlayer : MonoBehaviour
         Player.CardinalDirection destinationDir =
             Player.NearestCardinalDirectionFromYaw(yawDestDeg);
 
-        if (destinationDir != m_PlayerToControl.direction) {
-            if ((Time.realtimeSinceStartup - m_LastTurnTime) > m_AiResponseDelaySec) {
-                float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
-                float diffDeg = Player.DiffAngleDeg(playerYawDeg, yawDestDeg);
-                if (diffDeg > 0.0) {
-                    TurnRight();
-                } else {
-                    TurnLeft();
+        if (FindMinForwardDistance() < m_AiMinForwardDistance) {
+            m_AiState = AiState.MoveToOpening;
+            MoveToOpening();
+        } else {
+
+            if (destinationDir != m_PlayerToControl.direction) {
+                if ((Time.realtimeSinceStartup - m_LastTurnTime) > m_AiResponseDelaySec) {
+                    float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
+                    float diffDeg = Player.DiffAngleDeg(playerYawDeg, yawDestDeg);
+                    if (diffDeg > 0.0) {
+                        if (m_RayResponseRangeMap["right"] > 2.0f) {
+                            TurnRight();
+                        }
+                    } else { 
+                        if (m_RayResponseRangeMap["left"] > 2.0f) {
+                            TurnLeft();
+                        }
+                    }
                 }
             }
         }
@@ -90,9 +100,15 @@ public class AiPlayer : MonoBehaviour
             if ((Time.realtimeSinceStartup - m_LastTurnTime) > m_AiResponseDelaySec) {
                 if (FindMinForwardDistance() < m_AiMinForwardDistance) {
                     if (m_RayResponseRangeMap["right"] > m_RayResponseRangeMap["left"]) {
-                        TurnRight();
-                    } else {
+                        if (m_RayResponseRangeMap["right"] > 4.0f) {
+                            TurnRight();
+                        } else {
+                            TurnLeft();
+                        }
+                    } else if (m_RayResponseRangeMap["left"] > 4.0f) {
                         TurnLeft();
+                    } else {
+                        TurnRight();
                     }
                 }
             }
