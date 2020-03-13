@@ -1905,7 +1905,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329280883}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e48ca094a1e564de586f8451a0e0eb1b, type: 3}
@@ -3117,7 +3117,6 @@ MonoBehaviour:
   m_TrailZ: -2
   m_MinGapBetweenTrails: 0.25
   m_IsPlaying: 0
-  m_IsDisbleCollision: 0
 --- !u!50 &2086345528
 Rigidbody2D:
   serializedVersion: 4
@@ -3178,8 +3177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OpponentPlayer: {fileID: 2091419712}
-  m_AiResponseDelaySec: 0.7
-  m_AiMinForwardDistance: 1
+  m_AiResponseDelaySec: 0.3
+  m_AiMinForwardDistance: 0.9
 --- !u!1 &2091419710
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,7 +3237,6 @@ MonoBehaviour:
   m_TrailZ: -2
   m_MinGapBetweenTrails: 0.25
   m_IsPlaying: 0
-  m_IsDisbleCollision: 0
 --- !u!50 &2091419713
 Rigidbody2D:
   serializedVersion: 4

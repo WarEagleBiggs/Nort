@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class AiPlayer : MonoBehaviour
 {
     public Player m_OpponentPlayer;
-    public float m_AiResponseDelaySec = 0.7f;
-    public float m_AiMinForwardDistance = 1.0f;
+    public float m_AiResponseDelaySec = 0.3f;
+    public float m_AiMinForwardDistance = 0.5f;
     
     private Player m_PlayerToControl;
 
@@ -30,13 +33,13 @@ public class AiPlayer : MonoBehaviour
     
     private AiState m_AiState = AiState.MoveTowards;
     
-    private Dictionary<string, Tuple<CoordFrame, Vector3>> m_RayDirectionMap;
+    private Dictionary<string, Tuple<CoordFrame, Vector3, Vector3>> m_RayDirectionMap;
     
     private Dictionary<string, float> m_RayResponseRangeMap;
 
     private Dictionary<string, string> m_RayColliderName;
     
-    private List<Vector3> m_DebugHitList;
+    private List<Tuple<Vector3, Vector3>> m_DebugHitList;
 
     private void Start()
     {
@@ -81,11 +84,11 @@ public class AiPlayer : MonoBehaviour
                     float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
                     float diffDeg = Player.DiffAngleDeg(playerYawDeg, yawDestDeg);
                     if (diffDeg > 0.0) {
-                        if (m_RayResponseRangeMap["right"] > 2.0f) {
+                        if (m_RayResponseRangeMap["right"] > 4.0f) {
                             TurnRight();
                         }
                     } else { 
-                        if (m_RayResponseRangeMap["left"] > 2.0f) {
+                        if (m_RayResponseRangeMap["left"] > 4.0f) {
                             TurnLeft();
                         }
                     }
@@ -100,12 +103,12 @@ public class AiPlayer : MonoBehaviour
             if ((Time.realtimeSinceStartup - m_LastTurnTime) > m_AiResponseDelaySec) {
                 if (FindMinForwardDistance() < m_AiMinForwardDistance) {
                     if (m_RayResponseRangeMap["right"] > m_RayResponseRangeMap["left"]) {
-                        if (m_RayResponseRangeMap["right"] > 4.0f) {
+                        if (m_RayResponseRangeMap["right"] > 1.0f) {
                             TurnRight();
                         } else {
                             TurnLeft();
                         }
-                    } else if (m_RayResponseRangeMap["left"] > 4.0f) {
+                    } else if (m_RayResponseRangeMap["left"] > 1.0f) {
                         TurnLeft();
                     } else {
                         TurnRight();
@@ -115,6 +118,8 @@ public class AiPlayer : MonoBehaviour
         }
     }
 
+    private AiState m_PrevState = AiState.MoveTowards;
+    
     private void UpdateAiState()
     {
         if (m_RayResponseRangeMap != null) {
@@ -145,19 +150,19 @@ public class AiPlayer : MonoBehaviour
     private void FireRays()
     {
         if (m_RayDirectionMap == null) {
-            m_RayDirectionMap = new Dictionary<string, Tuple<CoordFrame, Vector3>>();
-            m_RayDirectionMap["forward"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.LocalFrame, -Player.s_ForwardVec);
-            m_RayDirectionMap["left"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.LocalFrame, Player.s_RightVec);
-            m_RayDirectionMap["right"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.LocalFrame, -Player.s_RightVec);
-            m_RayDirectionMap["forwardLeft"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.LocalFrame, VectorFromAngle(-75.0f));
-            m_RayDirectionMap["forwardRight"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.LocalFrame, VectorFromAngle(-105.0f));
-            m_RayDirectionMap["towardOpponent"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.LocalFrame, Vector3.zero);
+            m_RayDirectionMap = new Dictionary<string, Tuple<CoordFrame, Vector3, Vector3>>();
+            m_RayDirectionMap["forward"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, -Player.s_ForwardVec, Vector3.zero);
+            m_RayDirectionMap["left"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, Player.s_RightVec, new Vector3(0.3f, 0.2f, 0.0f));
+            m_RayDirectionMap["right"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, -Player.s_RightVec, new Vector3(-0.3f, 0.2f, 0.0f));
+            m_RayDirectionMap["forwardLeft"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, VectorFromAngle(-70.0f), Vector3.zero);
+            m_RayDirectionMap["forwardRight"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, VectorFromAngle(-110.0f), Vector3.zero);
+            m_RayDirectionMap["towardOpponent"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, Vector3.zero, Vector3.zero);
 
             m_RayResponseRangeMap = new Dictionary<string, float>();
             m_RayResponseRangeMap["forward"] = Single.PositiveInfinity;
@@ -176,32 +181,34 @@ public class AiPlayer : MonoBehaviour
             m_RayColliderName["towardOpponent"] = "";
         }
 
-        m_DebugHitList = new List<Vector3>();
+        m_DebugHitList = new List<Tuple<Vector3, Vector3>>();
         
         Vector3 pos = transform.localPosition;
         
         foreach (var entry in m_RayDirectionMap) {
             CoordFrame frame = entry.Value.Item1;
+            Vector3 offsetPos = entry.Value.Item3;
             Vector3 dirV = entry.Value.Item2;
             
             if (frame == CoordFrame.LocalFrame) {
                 dirV = transform.TransformDirection(dirV);
+                offsetPos = transform.TransformDirection(offsetPos);
             }
 
             if (m_AiRayHitList == null) {
                 const int enoughIntersects = 5;
                 m_AiRayHitList = new RaycastHit2D[enoughIntersects];
             }
-
+            
             int numHits = Physics2D.RaycastNonAlloc(
-                pos,dirV, m_AiRayHitList, 100.0f);
+                pos + offsetPos,dirV, m_AiRayHitList, 100.0f);
 
             for (int i = 0; i < numHits; ++i) {
 
                 RaycastHit2D hit = m_AiRayHitList[i];
                 
                 if (hit.collider != null && hit.collider.name != m_PlayerToControl.name) {
-                    m_DebugHitList.Add(hit.point);
+                    m_DebugHitList.Add(new Tuple<Vector3, Vector3>(pos + offsetPos, hit.point));
                     m_RayResponseRangeMap[entry.Key] = hit.distance;
                     m_RayColliderName[entry.Key] = hit.collider.name;
                     // found first intersection, quit looking  
@@ -216,12 +223,18 @@ public class AiPlayer : MonoBehaviour
 
     void Update()
     {
+        if (m_PrevState != m_AiState) {
+            m_PrevState = m_AiState;
+
+            Debug.Log(m_AiState);
+        }
+
         if (m_RayDirectionMap != null) {
             // direction vector to opponent
             Vector3 towardV = (m_OpponentPlayer.transform.localPosition -
                                transform.localPosition).normalized;
-            m_RayDirectionMap["towardOpponent"] = new Tuple<CoordFrame, Vector3>(
-                CoordFrame.WorldFrame, towardV);
+            m_RayDirectionMap["towardOpponent"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.WorldFrame, towardV, Vector3.zero);
         }
         
         // fire rays into the scene
@@ -246,8 +259,10 @@ public class AiPlayer : MonoBehaviour
         // --- debug drawing ---
         if (m_DebugHitList != null) {
             Gizmos.color = Color.yellow;
-            foreach (Vector3 point in m_DebugHitList) {
-                Gizmos.DrawLine(transform.localPosition, point);
+            foreach (var entry in m_DebugHitList) {
+                Vector3 p0 = entry.Item1;
+                Vector3 p1 = entry.Item2;
+                Gizmos.DrawLine(p0, p1);
             }
 
             m_DebugHitList.Clear();
