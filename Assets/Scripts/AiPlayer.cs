@@ -65,6 +65,19 @@ public class AiPlayer : MonoBehaviour
         m_PlayerToControl.OnTurnLeft();
     }
 
+    private float MinRightCollisionDistance()
+    {
+        return Mathf.Min(
+            m_RayResponseRangeMap["rearRight"], 
+            m_RayResponseRangeMap["frontRight"]);
+    }
+    private float MinLeftCollisionDistance()
+    {
+        return Mathf.Min(
+            m_RayResponseRangeMap["rearLeft"], 
+            m_RayResponseRangeMap["frontLeft"]);
+    }
+
     private void MoveTowardOpponent()
     {
         Vector3 dirV = (m_OpponentPlayer.transform.localPosition -
@@ -84,11 +97,11 @@ public class AiPlayer : MonoBehaviour
                     float playerYawDeg = m_PlayerToControl.transform.eulerAngles.z;
                     float diffDeg = Player.DiffAngleDeg(playerYawDeg, yawDestDeg);
                     if (diffDeg > 0.0) {
-                        if (m_RayResponseRangeMap["right"] > 4.0f) {
+                        if (MinRightCollisionDistance() > 4.0f) {
                             TurnRight();
                         }
                     } else { 
-                        if (m_RayResponseRangeMap["left"] > 4.0f) {
+                        if (MinLeftCollisionDistance() > 4.0f) {
                             TurnLeft();
                         }
                     }
@@ -102,13 +115,13 @@ public class AiPlayer : MonoBehaviour
         if (m_RayResponseRangeMap != null) {
             if ((Time.realtimeSinceStartup - m_LastTurnTime) > m_AiResponseDelaySec) {
                 if (FindMinForwardDistance() < m_AiMinForwardDistance) {
-                    if (m_RayResponseRangeMap["right"] > m_RayResponseRangeMap["left"]) {
-                        if (m_RayResponseRangeMap["right"] > 1.0f) {
+                    if (m_RayResponseRangeMap["rearRight"] > m_RayResponseRangeMap["rearLeft"]) {
+                        if (MinRightCollisionDistance() > 2.0f) {
                             TurnRight();
                         } else {
                             TurnLeft();
                         }
-                    } else if (m_RayResponseRangeMap["left"] > 1.0f) {
+                    } else if (MinLeftCollisionDistance() > 2.0f) {
                         TurnLeft();
                     } else {
                         TurnRight();
@@ -153,10 +166,17 @@ public class AiPlayer : MonoBehaviour
             m_RayDirectionMap = new Dictionary<string, Tuple<CoordFrame, Vector3, Vector3>>();
             m_RayDirectionMap["forward"] = new Tuple<CoordFrame, Vector3, Vector3>(
                 CoordFrame.LocalFrame, -Player.s_ForwardVec, Vector3.zero);
-            m_RayDirectionMap["left"] = new Tuple<CoordFrame, Vector3, Vector3>(
+            
+            m_RayDirectionMap["rearLeft"] = new Tuple<CoordFrame, Vector3, Vector3>(
                 CoordFrame.LocalFrame, Player.s_RightVec, new Vector3(0.3f, 0.2f, 0.0f));
-            m_RayDirectionMap["right"] = new Tuple<CoordFrame, Vector3, Vector3>(
+            m_RayDirectionMap["rearRight"] = new Tuple<CoordFrame, Vector3, Vector3>(
                 CoordFrame.LocalFrame, -Player.s_RightVec, new Vector3(-0.3f, 0.2f, 0.0f));
+            
+            m_RayDirectionMap["frontLeft"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, Player.s_RightVec, new Vector3(0.3f, -0.25f, 0.0f));
+            m_RayDirectionMap["frontRight"] = new Tuple<CoordFrame, Vector3, Vector3>(
+                CoordFrame.LocalFrame, -Player.s_RightVec, new Vector3(-0.3f, -0.25f, 0.0f));
+            
             m_RayDirectionMap["forwardLeft"] = new Tuple<CoordFrame, Vector3, Vector3>(
                 CoordFrame.LocalFrame, VectorFromAngle(-70.0f), Vector3.zero);
             m_RayDirectionMap["forwardRight"] = new Tuple<CoordFrame, Vector3, Vector3>(
@@ -166,16 +186,20 @@ public class AiPlayer : MonoBehaviour
 
             m_RayResponseRangeMap = new Dictionary<string, float>();
             m_RayResponseRangeMap["forward"] = Single.PositiveInfinity;
-            m_RayResponseRangeMap["right"] = Single.PositiveInfinity;
-            m_RayResponseRangeMap["left"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["rearRight"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["rearLeft"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["frontRight"] = Single.PositiveInfinity;
+            m_RayResponseRangeMap["frontLeft"] = Single.PositiveInfinity;
             m_RayResponseRangeMap["forwardLeft"] = Single.PositiveInfinity;
             m_RayResponseRangeMap["forwardRight"] = Single.PositiveInfinity;
             m_RayResponseRangeMap["towardOpponent"] = Single.PositiveInfinity;
             
             m_RayColliderName = new Dictionary<string, string>();
             m_RayColliderName["forward"] = "";
-            m_RayColliderName["right"] = "";
-            m_RayColliderName["left"] = "";
+            m_RayColliderName["rearRight"] = "";
+            m_RayColliderName["rearRight"] = "";
+            m_RayColliderName["frontLeft"] = "";
+            m_RayColliderName["frontLeft"] = "";
             m_RayColliderName["forwardLeft"] = "";
             m_RayColliderName["forwardRight"] = "";
             m_RayColliderName["towardOpponent"] = "";
@@ -223,11 +247,11 @@ public class AiPlayer : MonoBehaviour
 
     void Update()
     {
-        if (m_PrevState != m_AiState) {
-            m_PrevState = m_AiState;
-
-            Debug.Log(m_AiState);
-        }
+//        if (m_PrevState != m_AiState) {
+//            m_PrevState = m_AiState;
+//
+//            Debug.Log(m_AiState);
+//        }
 
         if (m_RayDirectionMap != null) {
             // direction vector to opponent
